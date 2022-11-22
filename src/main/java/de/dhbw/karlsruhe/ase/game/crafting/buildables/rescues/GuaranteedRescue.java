@@ -1,0 +1,27 @@
+package de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues;
+
+import de.dhbw.karlsruhe.ase.game.crafting.CraftingPlan;
+import de.dhbw.karlsruhe.ase.game.crafting.buildables.AbstractBuildable;
+import de.dhbw.karlsruhe.ase.game.dice.Dice;
+
+/**
+ * Creates a new Guaranteed Rescue that will <b>always</b> succeed when attempting an {@link #endeavor(Dice)}.
+ *
+ * @author Dominik Ochs
+ * @version 1.0
+ */
+public class GuaranteedRescue extends AbstractBuildable implements Rescue {
+    /**
+     * Creates a new GuaranteedRescue with its crafting plan as required by {@link AbstractBuildable}
+     *
+     * @param plan the plan for this Buildable
+     */
+    public GuaranteedRescue(final CraftingPlan plan) {
+        super(plan);
+    }
+
+    @Override
+    public boolean endeavor(final Dice roll) {
+        return true; // guaranteed rescue
+    }
+}
