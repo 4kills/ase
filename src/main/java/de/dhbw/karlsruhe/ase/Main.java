@@ -1,6 +1,6 @@
 package de.dhbw.karlsruhe.ase;
 
-import de.dhbw.karlsruhe.ase.cli.CommandParser;
+import de.dhbw.karlsruhe.ase.cli.parsers.CommandParser;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.cli.commands.QuitCommand;
 import de.dhbw.karlsruhe.ase.game.Command;

@@ -6,14 +6,15 @@ import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
 import de.dhbw.karlsruhe.ase.game.IllegalGameInstructionException;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.game.cards.Card;
 import de.dhbw.karlsruhe.ase.game.cards.CardDeck;
 
-import java.util.regex.Matcher;
+import java.util.List;
 
 /**
  * StartCommand starts a new game with the provided cards (user input)
  */
-public record StartCommand(Matcher mchr) implements Command {
+public record StartCommand(List<Card> cards) implements Command {
 
     @Override
     public void execute(final IslandEscapeGame game) {
@@ -22,10 +23,10 @@ public record StartCommand(Matcher mchr) implements Command {
             Terminal.printError("start error: game is running, cannot restart now: Perhaps you want to reset?");
             return;
         }
-        final String[] cards = mchr.group(1).split(",");
+
         final CardDeck deck = new CardDeck();
-        for (int i = cards.length - 1; i >= 0; i--) {
-            deck.lay(new CardParser().parse(cards[i]));
+        for (int i = cards.size() - 1; i >= 0; i--) {
+            deck.lay(cards.get(i));
         }
 
         try {
