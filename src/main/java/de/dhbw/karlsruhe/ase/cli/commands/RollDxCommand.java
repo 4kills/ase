@@ -1,7 +1,7 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
-import de.dhbw.karlsruhe.ase.cli.ArgumentParser;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
+import de.dhbw.karlsruhe.ase.cli.parsers.DiceParser;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GamePhaseException;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
@@ -14,12 +14,12 @@ import java.util.regex.Matcher;
  * Provides the specified roll of the specified type of dice and relays it to the logic
  * in order to potentially change the game phase
  */
-public record RollDxCommand(IslandEscapeGame game, ArgumentParser parser, Matcher mchr) implements Command {
+public record RollDxCommand(IslandEscapeGame game, Matcher mchr) implements Command {
     @Override
     public void execute() {
         if (!StandardOutput.gameIsRunning(game)) return;
 
-        final Dice dice = parser.parseDice(mchr);
+        final Dice dice = new DiceParser().parse(mchr);
         final String out;
         try {
             out = game.rollDx(dice);

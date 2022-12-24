@@ -20,7 +20,6 @@ final class Executor implements Commandable {
     private static final String OK = "OK";
 
     private final IslandEscapeGame game;
-    private final ArgumentParser parser;
     private final Matcher mchr;
     private final Instruction ins;
 
@@ -38,14 +37,13 @@ final class Executor implements Commandable {
         this.game = game;
         this.ins = ins;
         this.mchr = mchr;
-        this.parser = new ArgumentParser();
     }
 
     @Override
     public void execute() {
         switch (ins) {
             case START:
-                new StartCommand(game, parser, mchr).execute();
+                new StartCommand(game, mchr).execute();
                 break;
             case DRAW:
                 new DrawCommand(game).execute();
@@ -54,7 +52,7 @@ final class Executor implements Commandable {
                 new ListResourcesCommand(game).execute();
                 break;
             case BUILD:
-                new BuildCommand(game, parser, mchr).execute();
+                new BuildCommand(game, mchr).execute();
                 break;
             case LIST_BUILDINGS:
                 new ListBuildingsCommand(game).execute();
@@ -63,7 +61,7 @@ final class Executor implements Commandable {
                 new ShowBuildablesCommand(game).execute();
                 break;
             case ROLLDX:
-                new RollDxCommand(game, parser, mchr).execute();
+                new RollDxCommand(game, mchr).execute();
                 break;
             case RESET:
                 new ResetCommand(game).execute();

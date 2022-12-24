@@ -1,7 +1,7 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
-import de.dhbw.karlsruhe.ase.cli.ArgumentParser;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
+import de.dhbw.karlsruhe.ase.cli.parsers.CardParser;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
 import de.dhbw.karlsruhe.ase.game.IllegalGameInstructionException;
@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 /**
  * StartCommand starts a new game with the provided cards (user input)
  */
-public record StartCommand(IslandEscapeGame game, ArgumentParser parser, Matcher mchr) implements Command {
+public record StartCommand(IslandEscapeGame game, Matcher mchr) implements Command {
 
     @Override
     public void execute() {
@@ -25,7 +25,7 @@ public record StartCommand(IslandEscapeGame game, ArgumentParser parser, Matcher
         final String[] cards = mchr.group(1).split(",");
         final CardDeck deck = new CardDeck();
         for (int i = cards.length - 1; i >= 0; i--) {
-            deck.lay(parser.parseCard(cards[i]));
+            deck.lay(new CardParser().parse(cards[i]));
         }
 
         try {
