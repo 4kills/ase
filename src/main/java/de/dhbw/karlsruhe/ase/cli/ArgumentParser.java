@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
  * @author Dominik Ochs
  * @version 1.0
  */
-class ArgumentParser {
+public class ArgumentParser {
 
     /**
      * Parses user input and tries to interpret it as crafting plan.
@@ -22,7 +22,7 @@ class ArgumentParser {
      * @param type the type of Buildable to construct
      * @return the Crafting plan according to the buildable
      */
-    CraftingPlan parseConstructible(final String type) {
+    public CraftingPlan parseConstructible(final String type) {
         switch (type) {
             case "axe":
                 return CraftingPlan.AXE;
@@ -51,7 +51,7 @@ class ArgumentParser {
      * @param mchr the matcher used to get the user input
      * @return the Dice with its type and the roll
      */
-    Dice parseDice(final Matcher mchr) {
+    public Dice parseDice(final Matcher mchr) {
         final String roll;
         final DiceType diceType;
 
@@ -76,7 +76,7 @@ class ArgumentParser {
      * @param type the type of card.
      * @return The according Card
      */
-    Card parseCard(final String type) {
+    public Card parseCard(final String type) {
         switch (type) {
             case "wood":
                 return Card.WOOD;
