@@ -8,10 +8,10 @@ import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 /**
  * reset the game to the state right after the last successful start call
  */
-public record ResetCommand(IslandEscapeGame game) implements Command {
+public record ResetCommand() implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (game.getStatus() == GameStatus.UNINITIALIZED) {
             Terminal.printError("reset error: start must be called at least once");
             return;

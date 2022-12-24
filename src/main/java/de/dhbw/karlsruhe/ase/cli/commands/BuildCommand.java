@@ -12,10 +12,10 @@ import java.util.regex.Matcher;
 /**
  * Tries to build the Buildable provided by the user
  */
-public record BuildCommand(IslandEscapeGame game, Matcher mchr) implements Command {
+public record BuildCommand(Matcher mchr) implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
         final String out;
         try {

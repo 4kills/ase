@@ -1,5 +1,5 @@
 package de.dhbw.karlsruhe.ase.game;
 
 public interface Command {
-    void execute();
+    void execute(IslandEscapeGame game);
 }

@@ -13,10 +13,10 @@ import java.util.regex.Matcher;
 /**
  * StartCommand starts a new game with the provided cards (user input)
  */
-public record StartCommand(IslandEscapeGame game, Matcher mchr) implements Command {
+public record StartCommand(Matcher mchr) implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
 
         if (game.getStatus() == GameStatus.RUNNING) {
             Terminal.printError("start error: game is running, cannot restart now: Perhaps you want to reset?");

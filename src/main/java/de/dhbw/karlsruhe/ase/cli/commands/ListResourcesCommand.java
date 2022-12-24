@@ -7,10 +7,10 @@ import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 /**
  * lists the players resources
  */
-public record ListResourcesCommand(IslandEscapeGame game) implements Command {
+public record ListResourcesCommand() implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
         Terminal.printLine(game.listResources());
     }

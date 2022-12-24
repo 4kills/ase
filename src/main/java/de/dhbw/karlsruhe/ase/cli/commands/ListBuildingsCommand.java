@@ -7,10 +7,10 @@ import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 /**
  * Lists the Buildables in the possession of player
  */
-public record ListBuildingsCommand(IslandEscapeGame game) implements Command {
+public record ListBuildingsCommand() implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
         Terminal.printLine(game.listBuildings());
     }

@@ -1,8 +1,9 @@
 package de.dhbw.karlsruhe.ase;
 
+import de.dhbw.karlsruhe.ase.cli.CommandParser;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
-import de.dhbw.karlsruhe.ase.cli.Commandable;
-import de.dhbw.karlsruhe.ase.cli.Instruction;
+import de.dhbw.karlsruhe.ase.cli.commands.QuitCommand;
+import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 
 import java.io.IOException;
@@ -13,29 +14,34 @@ import java.io.IOException;
  * @author Dominik Ochs
  * @version 1.0
  */
-abstract class Main {
+public abstract class Main {
+
     /**
      * main entry point of the program
      * @param args the command line arguments of this program
      */
     public static void main(final String[] args) {
+        final var quit = new QuitCommand();
+        final var parser = new CommandParser();
+
         final IslandEscapeGame game = new IslandEscapeGame();
-        Commandable ins;
+
+        Command command = null;
+        String raw;
         do {
-            String raw;
             try {
                 raw = Terminal.readLine();
             } catch (final IOException e) {
                 Terminal.printError("an error occurred while reading input from standard in. "
                         + "Find the details attached. Continuation might be possible. "
-                        + "Try again and if the error persists, restart the program.");
-                Terminal.printError(e.getMessage());
-                e.printStackTrace();
-                ins = Instruction.COMMAND_NOT_FOUND;
+                        + "Try again and if the error persists, restart the program.\n" + e.getMessage());
                 continue;
             }
-            ins = Instruction.parse(raw, game);
-            ins.execute();
-        } while (!ins.shouldExit());
+
+            command = parser.parse(raw);
+            if (command != null) {
+                command.execute(game);
+            }
+        } while (!quit.equals(command));
     }
 }

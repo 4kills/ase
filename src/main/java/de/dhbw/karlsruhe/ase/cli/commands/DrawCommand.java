@@ -8,10 +8,10 @@ import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 /**
  * draws the top most card from the deck
  */
-public record DrawCommand(IslandEscapeGame game) implements Command {
+public record DrawCommand() implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
         final String out;
         try {

@@ -14,9 +14,9 @@ import java.util.regex.Matcher;
  * Provides the specified roll of the specified type of dice and relays it to the logic
  * in order to potentially change the game phase
  */
-public record RollDxCommand(IslandEscapeGame game, Matcher mchr) implements Command {
+public record RollDxCommand(Matcher mchr) implements Command {
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
 
         final Dice dice = new DiceParser().parse(mchr);

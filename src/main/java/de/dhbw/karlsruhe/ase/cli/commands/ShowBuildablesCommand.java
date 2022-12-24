@@ -8,10 +8,10 @@ import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 /**
  * Lists all the Buildables the player can possibly build
  */
-public record ShowBuildablesCommand(IslandEscapeGame game) implements Command {
+public record ShowBuildablesCommand() implements Command {
 
     @Override
-    public void execute() {
+    public void execute(final IslandEscapeGame game) {
         if (!StandardOutput.gameIsRunning(game)) return;
         final String out;
         try {
