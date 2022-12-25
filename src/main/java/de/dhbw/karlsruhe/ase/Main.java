@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.parsers.CommandParser;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.cli.commands.QuitCommand;
@@ -32,9 +33,8 @@ public abstract class Main {
             try {
                 raw = Terminal.readLine();
             } catch (final IOException e) {
-                Terminal.printError("an error occurred while reading input from standard in. "
-                        + "Find the details attached. Continuation might be possible. "
-                        + "Try again and if the error persists, restart the program.\n" + e.getMessage());
+                new ErrorBuilder("unexpectedly encountered: " + e.getMessage(), "continuation might be possible. "
+                        + "Try again and if the error persists, restart the program.\n").print();
                 continue;
             }
 

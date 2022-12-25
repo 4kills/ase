@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.cli.parsers.CardParser;
 import de.dhbw.karlsruhe.ase.game.Command;
@@ -20,7 +21,7 @@ public record StartCommand(List<Card> cards) implements Command {
     public void execute(final IslandEscapeGame game) {
 
         if (game.getStatus() == GameStatus.RUNNING) {
-            Terminal.printError("start error: game is running, cannot restart now: Perhaps you want to reset?");
+            new ErrorBuilder("game is running, can not use start now", "perhaps you want to reset").print();
             return;
         }
 
@@ -32,7 +33,8 @@ public record StartCommand(List<Card> cards) implements Command {
         try {
             game.start(deck);
         } catch (final IllegalGameInstructionException e) {
-            Terminal.printError("start error: " + e.getMessage());
+            new ErrorBuilder("starting game due to " + e.getMessage(),
+                    "check whether your command is semantically correct").print();
             return;
         }
         Terminal.printLine(StandardOutput.OK);

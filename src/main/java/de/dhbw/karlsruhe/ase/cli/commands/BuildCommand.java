@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GamePhaseException;
@@ -19,7 +20,7 @@ public record BuildCommand(CraftingPlan craftingPlan) implements Command {
         try {
             out = game.build(craftingPlan);
         } catch (final IllegalGameInstructionException | GamePhaseException e) {
-            Terminal.printError("build error: could not build because: " + e.getMessage());
+            new ErrorBuilder("could not build because: " + e.getMessage()).print();
             return;
         }
         Terminal.printLine(out);

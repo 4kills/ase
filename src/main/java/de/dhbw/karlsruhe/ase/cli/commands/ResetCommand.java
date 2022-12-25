@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
@@ -13,7 +14,8 @@ public record ResetCommand() implements Command {
     @Override
     public void execute(final IslandEscapeGame game) {
         if (game.getStatus() == GameStatus.UNINITIALIZED) {
-            Terminal.printError("reset error: start must be called at least once");
+            new ErrorBuilder("reset has been called before at least one start", "call start instead")
+                    .print();
             return;
         }
         game.reset();

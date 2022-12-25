@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
@@ -17,6 +18,14 @@ public final class StandardOutput {
      */
     public static final String OK = "OK";
 
+    public static final ErrorBuilder NO_START = new ErrorBuilder(
+            "start has not been called yet",
+            "use the start command first");
+
+    public static final ErrorBuilder NO_START_OR_RESET = new ErrorBuilder(
+            "the game has ended, this command is not allowed now",
+            "us start or reset to start a new game first");
+
     /**
      * Returns whether the game it currently initialized and not ended, additionally prints a generic error
      * if the game is not running
@@ -25,11 +34,11 @@ public final class StandardOutput {
      */
     public static boolean gameIsRunning(final IslandEscapeGame game) {
         if (game.getStatus() == GameStatus.UNINITIALIZED) {
-            Terminal.printError("error: start has not been called yet");
+            NO_START.print();
             return false;
         }
         if (game.getStatus() == GameStatus.ENDED) {
-            Terminal.printError("error: start or reset has not been called yet");
+            NO_START_OR_RESET.print();
             return false;
         }
         return true;

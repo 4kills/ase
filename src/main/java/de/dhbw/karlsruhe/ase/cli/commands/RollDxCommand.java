@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GamePhaseException;
@@ -20,7 +21,7 @@ public record RollDxCommand(Dice dice) implements Command {
         try {
             out = game.rollDx(dice);
         } catch (final GamePhaseException | InvalidDiceException e) {
-            Terminal.printError("rollDx error: " + e.getMessage());
+            new ErrorBuilder("rollDx failed due to " + e.getMessage()).print();
             return;
         }
         Terminal.printLine(out);

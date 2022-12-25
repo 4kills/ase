@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GamePhaseException;
@@ -17,7 +18,8 @@ public record DrawCommand() implements Command {
         try {
             out = game.draw();
         } catch (final GamePhaseException e) {
-            Terminal.printError("draw error: wrong game phase: " + e.getMessage());
+            new ErrorBuilder("could not draw due to wrong game phase: " + e.getMessage(),
+                    "try changing game phase first").print();
             return;
         }
         Terminal.printLine(out);

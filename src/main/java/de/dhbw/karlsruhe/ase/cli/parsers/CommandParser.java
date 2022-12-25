@@ -1,8 +1,8 @@
 package de.dhbw.karlsruhe.ase.cli.parsers;
 
 import de.dhbw.karlsruhe.ase.cli.CommandFactory;
+import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Parser;
-import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 
 import java.util.regex.Matcher;
@@ -18,11 +18,17 @@ public final class CommandParser implements Parser<Command, String> {
         for (final CommandFactory cf : CommandFactory.values()) {
             final Matcher matcher = cf.regex.matcher(input);
             if (matcher.find()) {
-                return cf.factory.apply(matcher);
+                try {
+                    return cf.factory.apply(matcher);
+                } catch (UnsupportedOperationException e) {
+                    new ErrorBuilder("illegal arguments, the arguments to the command are not recognized due to "
+                            + e.getMessage(), "try again").print();
+                    return null;
+                }
             }
         }
 
-        Terminal.printError("command not found or wrong parameters supplied");
+        new ErrorBuilder("unknown command entered", "perhaps you have a typo in the command").print();
         return null;
     }
 }
