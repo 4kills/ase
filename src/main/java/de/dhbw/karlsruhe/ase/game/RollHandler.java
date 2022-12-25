@@ -12,15 +12,11 @@ import de.dhbw.karlsruhe.ase.game.dice.InvalidDiceException;
  * @author Dominik Ochs
  * @version 1.0
  */
-class RollHandler {
-    private static final String LOSE = "lose";
-    private static final String SURVIVED = "survived";
-    private static final String WIN = "win";
-
+public class RollHandler {
     private final Camp camp;
     private final Card lastCard;
 
-    private String output;
+    private OutcomeType outcome;
 
     /**
      * Creates a new roll handler with the provided camp and last card to act on
@@ -45,14 +41,9 @@ class RollHandler {
         GamePhase newPhase = GamePhase.SCAVENGE;
 
         switch (phase) {
-            case ENCOUNTER:
-                encounter(roll);
-                break;
-            case ENDEAVOR:
-                newPhase = endeavor(roll);
-                break;
-            default:
-                throw new UnsupportedOperationException(phase + " is not implemented yet");
+            case ENCOUNTER -> encounter(roll);
+            case ENDEAVOR -> newPhase = endeavor(roll);
+            default -> throw new UnsupportedOperationException(phase + " is not implemented yet");
         }
 
         return newPhase;
@@ -67,11 +58,11 @@ class RollHandler {
     private void encounter(final Dice roll) throws InvalidDiceException {
         final AnimalEncounter encounter = AnimalEncounter.fromCard(lastCard);
         if (encounter.fight(new Dice(roll.getType(), roll.getRoll() + camp.getBonusDamage()))) {
-            output = SURVIVED;
+            outcome = OutcomeType.SURVIVED;
             return;
         }
         camp.ravage();
-        output = LOSE;
+        outcome = OutcomeType.LOSE;
     }
 
     /**
@@ -84,10 +75,10 @@ class RollHandler {
     private GamePhase endeavor(final Dice roll) throws InvalidDiceException {
         final Rescue rescue = camp.getCurrentEndeavor();
         if (!rescue.endeavor(roll)) {
-            output = LOSE;
+            outcome = OutcomeType.LOSE;
             return GamePhase.SCAVENGE;
         }
-        output = WIN;
+        outcome = OutcomeType.WIN;
         return GamePhase.END;
     }
 
@@ -96,7 +87,13 @@ class RollHandler {
      *
      * @return the output produced by the roll
      */
-    public String getOutput() {
-        return output;
+    public OutcomeType getOutcome() {
+        return outcome;
+    }
+
+    public enum OutcomeType {
+        LOSE,
+        SURVIVED,
+        WIN
     }
 }

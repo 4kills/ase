@@ -10,6 +10,9 @@ import de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues.Rescue;
 import de.dhbw.karlsruhe.ase.game.dice.Dice;
 import de.dhbw.karlsruhe.ase.game.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.game.dice.InvalidDiceException;
+import de.dhbw.karlsruhe.ase.game.results.ActionResult;
+import de.dhbw.karlsruhe.ase.game.results.DrawResult;
+import de.dhbw.karlsruhe.ase.game.results.RollResult;
 
 import java.util.Collection;
 
@@ -21,10 +24,6 @@ import java.util.Collection;
  * @version 1.0
  */
 public final class IslandEscapeGame {
-    private static final String WIN = "win";
-    private static final String LOST = "lost";
-    private static final String OK = "OK";
-
     private CardInvalidator invalidator;
     private GameStatus status = GameStatus.UNINITIALIZED;
     private GamePhase phase;
@@ -54,14 +53,15 @@ public final class IslandEscapeGame {
      * @throws IllegalGameInstructionException if resources are missing or other requirements are not met
      *                                         (duplicate items, no fireplace)
      */
-    public String build(final CraftingPlan plan) throws GameStatusException, GamePhaseException, IllegalGameInstructionException {
+    public ActionResult build(final CraftingPlan plan)
+            throws GameStatusException, GamePhaseException, IllegalGameInstructionException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase);
         final Buildable crafted = camp.build(plan);
 
         if (crafted.getCategory() != BuildableCategory.RESCUE) {
-            if (hasLost()) return OK + getOutputLost();  //TODO maybe change output here
-            return OK;
+            if (hasLost()) return ActionResult.LOSE;
+            return ActionResult.NEUTRAL;
         }
         phase = GamePhase.ENDEAVOR;
         final Rescue rescue = (Rescue) crafted;
@@ -75,12 +75,12 @@ public final class IslandEscapeGame {
             throw new RuntimeException(e);
         }
         if (!success) {
-            if (hasLost()) return OK + getOutputLost(); //TODO maybe change output here
-            return OK;
+            if (hasLost()) return ActionResult.LOSE;
+            return ActionResult.NEUTRAL;
         }
         phase = GamePhase.END;
         status = GameStatus.ENDED;
-        return WIN;
+        return ActionResult.WIN;
     }
 
     /**
@@ -89,7 +89,7 @@ public final class IslandEscapeGame {
      * @return the drawn card as string
      * @throws GamePhaseException if called not during the scavenge phase
      */
-    public String draw() throws GameStatusException, GamePhaseException {
+    public DrawResult draw() throws GameStatusException, GamePhaseException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase);
         if (invalidator.isDepleted()) throw new GamePhaseException(phase, "No more cards to draw");
@@ -99,9 +99,9 @@ public final class IslandEscapeGame {
         if (invalidator.isDepleted() && !camp.canBuildAnything() && phase != GamePhase.ENCOUNTER) {
             phase = GamePhase.END;
             status = GameStatus.ENDED;
-            return invalidator.getLastDraw().toString() + getOutputLost();  //TODO: maybe change output here
+            return new DrawResult(invalidator.getLastDraw(), ActionResult.LOSE);
         }
-        return invalidator.getLastDraw().toString();
+        return new DrawResult(invalidator.getLastDraw(), ActionResult.NEUTRAL);
     }
 
     /**
@@ -113,15 +113,15 @@ public final class IslandEscapeGame {
      * @throws GamePhaseException   if the game phaese is not encounter or endeavor
      * @throws InvalidDiceException if the dice does not have a compatible type to the rescue or animal
      */
-    public String rollDx(final Dice dice) throws GameStatusException, GamePhaseException, InvalidDiceException {
+    public RollResult rollDx(final Dice dice) throws GameStatusException, GamePhaseException, InvalidDiceException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.ENDEAVOR && phase != GamePhase.ENCOUNTER)
             throw new GamePhaseException(phase);
         final RollHandler handler = new RollHandler(camp, invalidator.getLastDraw());
         phase = handler.handle(phase, dice);
         if (phase == GamePhase.END) status = GameStatus.ENDED;
-        if (hasLost()) return handler.getOutput() + getOutputLost(); // TODO: maybe change output
-        return handler.getOutput();
+        if (hasLost()) return new RollResult(handler.getOutcome(), ActionResult.LOSE);
+        return new RollResult(handler.getOutcome(), ActionResult.NEUTRAL);
     }
 
     /**
@@ -166,24 +166,6 @@ public final class IslandEscapeGame {
     public String listResources() throws GameStatusException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         return camp.resourcesToString();
-    }
-
-    /**
-     * Returns the status of the Game. Not to be confused with the game phase
-     *
-     * @return the status of the game.
-     */
-    public GameStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Returns the appropriate output if the user has lost that may be appended to regular output
-     *
-     * @return the line separator of the system concatenated with {@link #LOST}
-     */
-    private String getOutputLost() {
-        return System.lineSeparator() + LOST;
     }
 
     /**

@@ -18,6 +18,11 @@ public final class StandardOutput {
      * OK represents the standard output for a successful command with no return value
      */
     public static final String OK = "OK";
+    public static final String WIN = "win";
+    public static final String LOST = "lost";
+
+    public static final String NL_LOST = System.lineSeparator() + LOST;
+    public static final String OK_LOST = OK + NL_LOST;
 
     public static final ErrorBuilder NO_START = new ErrorBuilder(
             "start has not been called yet",
