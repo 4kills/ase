@@ -1,6 +1,6 @@
 package de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues;
 
-import de.dhbw.karlsruhe.ase.game.dice.Dice;
+import de.dhbw.karlsruhe.ase.game.dice.Roll;
 import de.dhbw.karlsruhe.ase.game.dice.InvalidDiceException;
 
 /**
@@ -20,5 +20,5 @@ public interface Rescue {
      * @return true if the endeavor succeeds, false otherwise
      * @throws InvalidDiceException if the dice is not of the same type as the required dice for the rescue
      */
-    boolean endeavor(Dice roll) throws InvalidDiceException;
+    boolean endeavor(Roll roll) throws InvalidDiceException;
 }

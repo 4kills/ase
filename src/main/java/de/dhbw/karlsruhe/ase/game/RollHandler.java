@@ -3,7 +3,7 @@ package de.dhbw.karlsruhe.ase.game;
 import de.dhbw.karlsruhe.ase.game.cards.Card;
 import de.dhbw.karlsruhe.ase.game.crafting.Camp;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues.Rescue;
-import de.dhbw.karlsruhe.ase.game.dice.Dice;
+import de.dhbw.karlsruhe.ase.game.dice.Roll;
 import de.dhbw.karlsruhe.ase.game.dice.InvalidDiceException;
 
 /**
@@ -37,7 +37,7 @@ public class RollHandler {
      * @return the new game phase that is to be assumed after the roll is evaluated
      * @throws InvalidDiceException if the provided user roll and the required roll do not have the same type
      */
-    public GamePhase handle(final GamePhase phase, final Dice roll) throws InvalidDiceException {
+    public GamePhase handle(final GamePhase phase, final Roll roll) throws InvalidDiceException {
         GamePhase newPhase = GamePhase.SCAVENGE;
 
         switch (phase) {
@@ -55,9 +55,9 @@ public class RollHandler {
      * @param roll the roll of the user
      * @throws InvalidDiceException if the provided user roll and the required roll do not have the same type
      */
-    private void encounter(final Dice roll) throws InvalidDiceException {
+    private void encounter(final Roll roll) throws InvalidDiceException {
         final AnimalEncounter encounter = AnimalEncounter.fromCard(lastCard);
-        if (encounter.fight(new Dice(roll.getType(), roll.getRoll() + camp.getBonusDamage()))) {
+        if (encounter.fight(roll.raiseRollBy(camp.getBonusDamage()))) {
             outcome = OutcomeType.SURVIVED;
             return;
         }
@@ -72,7 +72,7 @@ public class RollHandler {
      * @return Returns the new game phase depending on whether the roll succeeded or not
      * @throws InvalidDiceException if the provided user roll and the required roll do not have the same type
      */
-    private GamePhase endeavor(final Dice roll) throws InvalidDiceException {
+    private GamePhase endeavor(final Roll roll) throws InvalidDiceException {
         final Rescue rescue = camp.getCurrentEndeavor();
         if (!rescue.endeavor(roll)) {
             outcome = OutcomeType.LOSE;

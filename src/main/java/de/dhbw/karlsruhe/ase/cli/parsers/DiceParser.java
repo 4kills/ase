@@ -1,12 +1,12 @@
 package de.dhbw.karlsruhe.ase.cli.parsers;
 
 import de.dhbw.karlsruhe.ase.cli.Parser;
-import de.dhbw.karlsruhe.ase.game.dice.Dice;
+import de.dhbw.karlsruhe.ase.game.dice.Roll;
 import de.dhbw.karlsruhe.ase.game.dice.DiceType;
 
 import java.util.regex.Matcher;
 
-public final class DiceParser implements Parser<Dice, Matcher> {
+public final class DiceParser implements Parser<Roll, Matcher> {
 
     /**
      * Parses a rollDx y command by looking for the type of dice as well as the roll
@@ -15,7 +15,7 @@ public final class DiceParser implements Parser<Dice, Matcher> {
      * @return the Dice with its type and the roll
      */
     @Override
-    public Dice parse(final Matcher raw) {
+    public Roll parse(final Matcher raw) {
         final String roll;
         final DiceType diceType;
 
@@ -30,7 +30,7 @@ public final class DiceParser implements Parser<Dice, Matcher> {
             roll = raw.group(6);
         }
 
-        return new Dice(diceType, Integer.parseInt(roll));
+        return new Roll(diceType, Integer.parseInt(roll));
     }
 
 }

@@ -9,23 +9,23 @@ package de.dhbw.karlsruhe.ase.game.dice;
  * @version 1.0
  */
 public final class InvalidDiceException extends Exception {
-    private final Dice dice1;
-    private final Dice dice2;
+    private final Roll roll1;
+    private final Roll roll2;
 
     /**
      * Creates a new InvalidDiceException from the two dice that were incompatible. They are used
      * in getting the exception message ({@link #getMessage()}.
      *
-     * @param dice1 first dice that is incompatible with dice2
-     * @param dice2 second dice that is incompatible with dice1
+     * @param roll1 first dice that is incompatible with dice2
+     * @param roll2 second dice that is incompatible with dice1
      */
-    public InvalidDiceException(final Dice dice1, final Dice dice2) {
-        this.dice1 = dice1;
-        this.dice2 = dice2;
+    public InvalidDiceException(final Roll roll1, final Roll roll2) {
+        this.roll1 = roll1;
+        this.roll2 = roll2;
     }
 
     @Override
     public String getMessage() {
-        return "wrong dice: type " + dice1.getType() + " and " + dice2.getType() + " are incompatible";
+        return "wrong dice: type " + roll1.type() + " and " + roll2.type() + " are incompatible";
     }
 }

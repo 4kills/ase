@@ -7,7 +7,7 @@ import de.dhbw.karlsruhe.ase.game.crafting.ResourceStash;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.Buildable;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.BuildableCategory;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues.Rescue;
-import de.dhbw.karlsruhe.ase.game.dice.Dice;
+import de.dhbw.karlsruhe.ase.game.dice.Roll;
 import de.dhbw.karlsruhe.ase.game.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.game.dice.InvalidDiceException;
 import de.dhbw.karlsruhe.ase.game.results.ActionResult;
@@ -110,18 +110,18 @@ public final class IslandEscapeGame {
      * Rolls a dice and handles the roll depending on the current game phase. Attempts an endeavor
      * or fights an animal encounter
      *
-     * @param dice the roll of the user
+     * @param roll the roll of the user
      * @return a string outputting the result from the roll
      * @throws GamePhaseException   if the game phaese is not encounter or endeavor
      * @throws InvalidDiceException if the dice does not have a compatible type to the rescue or animal
      */
-    public RollResult rollDx(final Dice dice) throws GameStatusException, GamePhaseException, InvalidDiceException {
+    public RollResult rollDx(final Roll roll) throws GameStatusException, GamePhaseException, InvalidDiceException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.ENDEAVOR && phase != GamePhase.ENCOUNTER)
             throw new GamePhaseException(phase);
 
         final RollHandler handler = new RollHandler(camp, invalidator.getLastDraw());
-        phase = handler.handle(phase, dice);
+        phase = handler.handle(phase, roll);
 
         if (phase == GamePhase.END) status = GameStatus.ENDED;
         if (hasLost()) return new RollResult(handler.getOutcome(), ActionResult.LOSE);
