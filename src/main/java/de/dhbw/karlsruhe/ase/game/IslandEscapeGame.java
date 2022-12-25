@@ -40,6 +40,7 @@ public final class IslandEscapeGame {
         if (status == GameStatus.RUNNING) throw new GameStatusException(status);
         if (!deck.isValid()) throw new IllegalGameInstructionException("the provided card deck was not valid,"
                 + " meaning it did not meet the requirements for the number of certain cards in the deck");
+
         this.deck = deck;
         initialize();
     }
@@ -57,6 +58,7 @@ public final class IslandEscapeGame {
             throws GameStatusException, GamePhaseException, IllegalGameInstructionException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase);
+
         final Buildable crafted = camp.build(plan);
 
         if (crafted.getCategory() != BuildableCategory.RESCUE) {
@@ -117,8 +119,10 @@ public final class IslandEscapeGame {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.ENDEAVOR && phase != GamePhase.ENCOUNTER)
             throw new GamePhaseException(phase);
+
         final RollHandler handler = new RollHandler(camp, invalidator.getLastDraw());
         phase = handler.handle(phase, dice);
+
         if (phase == GamePhase.END) status = GameStatus.ENDED;
         if (hasLost()) return new RollResult(handler.getOutcome(), ActionResult.LOSE);
         return new RollResult(handler.getOutcome(), ActionResult.NEUTRAL);
@@ -129,6 +133,7 @@ public final class IslandEscapeGame {
      */
     public void reset() throws GameStatusException {
         if (status == GameStatus.UNINITIALIZED) throw new GameStatusException(status);
+
         deck.reset();
         initialize();
     }
@@ -142,6 +147,7 @@ public final class IslandEscapeGame {
     public List<CraftingPlan> showBuildables() throws GameStatusException, GamePhaseException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase, "can be only called when build can");
+
         return camp.listPossibleCraftingPlans();
     }
 
@@ -152,6 +158,7 @@ public final class IslandEscapeGame {
      */
     public List<Buildable> listBuildings() throws GameStatusException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
+
         return camp.listConstructed();
     }
 
@@ -162,6 +169,7 @@ public final class IslandEscapeGame {
      */
     public List<Resource> listResources() throws GameStatusException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
+
         return camp.resources();
     }
 
