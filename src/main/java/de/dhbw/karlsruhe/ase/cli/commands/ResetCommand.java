@@ -4,6 +4,7 @@ import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
+import de.dhbw.karlsruhe.ase.game.GameStatusException;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 
 /**
@@ -13,12 +14,13 @@ public record ResetCommand() implements Command {
 
     @Override
     public void execute(final IslandEscapeGame game) {
-        if (game.getStatus() == GameStatus.UNINITIALIZED) {
+        try {
+            game.reset();
+        } catch (final GameStatusException e) {
             new ErrorBuilder("reset has been called before at least one start", "call start instead")
                     .print();
             return;
         }
-        game.reset();
         Terminal.printLine(StandardOutput.OK);
     }
 }

@@ -3,6 +3,7 @@ package de.dhbw.karlsruhe.ase.cli.commands;
 import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.GameStatus;
+import de.dhbw.karlsruhe.ase.game.GameStatusException;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 
 // "static" class
@@ -27,20 +28,16 @@ public final class StandardOutput {
             "us start or reset to start a new game first");
 
     /**
-     * Returns whether the game it currently initialized and not ended, additionally prints a generic error
-     * if the game is not running
+     * Prints a fitting error message according to the game status exception
      *
-     * @return true if the game is running, false otherwise
+     * @param e the exception to check
      */
-    public static boolean gameIsRunning(final IslandEscapeGame game) {
-        if (game.getStatus() == GameStatus.UNINITIALIZED) {
+    public static void printGameStatusError(final GameStatusException e) {
+        if (e.gameStatus == GameStatus.UNINITIALIZED) {
             NO_START.print();
-            return false;
         }
-        if (game.getStatus() == GameStatus.ENDED) {
+        if (e.gameStatus == GameStatus.ENDED) {
             NO_START_OR_RESET.print();
-            return false;
         }
-        return true;
     }
 }

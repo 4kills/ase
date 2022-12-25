@@ -37,7 +37,8 @@ public final class IslandEscapeGame {
      * @param deck the deck to start the game with
      * @throws IllegalGameInstructionException if the deck is invalid
      */
-    public void start(final CardDeck deck) throws IllegalGameInstructionException {
+    public void start(final CardDeck deck) throws GameStatusException, IllegalGameInstructionException {
+        if (status == GameStatus.RUNNING) throw new GameStatusException(status);
         if (!deck.isValid()) throw new IllegalGameInstructionException("the provided card deck was not valid,"
                 + " meaning it did not meet the requirements for the number of certain cards in the deck");
         this.deck = deck;
@@ -53,7 +54,8 @@ public final class IslandEscapeGame {
      * @throws IllegalGameInstructionException if resources are missing or other requirements are not met
      *                                         (duplicate items, no fireplace)
      */
-    public String build(final CraftingPlan plan) throws GamePhaseException, IllegalGameInstructionException {
+    public String build(final CraftingPlan plan) throws GameStatusException, GamePhaseException, IllegalGameInstructionException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase);
         final Buildable crafted = camp.build(plan);
 
@@ -87,7 +89,8 @@ public final class IslandEscapeGame {
      * @return the drawn card as string
      * @throws GamePhaseException if called not during the scavenge phase
      */
-    public String draw() throws GamePhaseException {
+    public String draw() throws GameStatusException, GamePhaseException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase);
         if (invalidator.isDepleted()) throw new GamePhaseException(phase, "No more cards to draw");
 
@@ -110,7 +113,8 @@ public final class IslandEscapeGame {
      * @throws GamePhaseException   if the game phaese is not encounter or endeavor
      * @throws InvalidDiceException if the dice does not have a compatible type to the rescue or animal
      */
-    public String rollDx(final Dice dice) throws GamePhaseException, InvalidDiceException {
+    public String rollDx(final Dice dice) throws GameStatusException, GamePhaseException, InvalidDiceException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.ENDEAVOR && phase != GamePhase.ENCOUNTER)
             throw new GamePhaseException(phase);
         final RollHandler handler = new RollHandler(camp, invalidator.getLastDraw());
@@ -123,7 +127,8 @@ public final class IslandEscapeGame {
     /**
      * Resets the game to the initial state after the previous start call with the deck being reset
      */
-    public void reset() {
+    public void reset() throws GameStatusException {
+        if (status == GameStatus.UNINITIALIZED) throw new GameStatusException(status);
         deck.reset();
         initialize();
     }
@@ -135,7 +140,8 @@ public final class IslandEscapeGame {
      * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
      * @throws GamePhaseException if the game phase is not Scavenge
      */
-    public String showBuildables() throws GamePhaseException {
+    public String showBuildables() throws GameStatusException, GamePhaseException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase, "can be only called when build can");
         return camp.showBuildables();
     }
@@ -146,7 +152,8 @@ public final class IslandEscapeGame {
      * @return Returns "EMPTY" or
      * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
      */
-    public String listBuildings() {
+    public String listBuildings() throws GameStatusException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         return camp.constructedToString();
     }
 
@@ -156,7 +163,8 @@ public final class IslandEscapeGame {
      * @return Returns "EMPTY" or
      * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
      */
-    public String listResources() {
+    public String listResources() throws GameStatusException {
+        if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         return camp.resourcesToString();
     }
 

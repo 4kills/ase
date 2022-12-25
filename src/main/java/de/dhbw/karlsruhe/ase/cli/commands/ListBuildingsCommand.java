@@ -2,6 +2,7 @@ package de.dhbw.karlsruhe.ase.cli.commands;
 
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
+import de.dhbw.karlsruhe.ase.game.GameStatusException;
 import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
 
 /**
@@ -11,7 +12,11 @@ public record ListBuildingsCommand() implements Command {
 
     @Override
     public void execute(final IslandEscapeGame game) {
-        if (!StandardOutput.gameIsRunning(game)) return;
-        Terminal.printLine(game.listBuildings());
+        try{
+            Terminal.printLine(game.listBuildings());
+        } catch (final GameStatusException e) {
+            StandardOutput.printGameStatusError(e);
+            return;
+        }
     }
 }
