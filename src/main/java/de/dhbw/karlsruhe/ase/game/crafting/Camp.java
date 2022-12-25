@@ -1,7 +1,6 @@
 package de.dhbw.karlsruhe.ase.game.crafting;
 
 import de.dhbw.karlsruhe.ase.game.IllegalGameInstructionException;
-import de.dhbw.karlsruhe.ase.game.auxiliaries.CollectionStringer;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.Buildable;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.BuildableCategory;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.buildings.Building;
@@ -10,7 +9,6 @@ import de.dhbw.karlsruhe.ase.game.crafting.buildables.rescues.Rescue;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.tools.Tool;
 
 import java.util.ArrayDeque;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashSet;
@@ -26,8 +24,6 @@ import java.util.Set;
  * @version 1.0
  */
 public class Camp {
-    private static final String EMPTY = "EMPTY";
-
     private final ResourceStash stash;
     private final Workbench workbench;
     private final Deque<Buildable> constructed = new ArrayDeque<>();
@@ -44,16 +40,6 @@ public class Camp {
     public Camp(final ResourceStash stash) {
         this.stash = stash;
         this.workbench = new Workbench(stash);
-    }
-
-    /**
-     * Returns all the resources in the stash as string. They are in descending order of their time of retrieval
-     *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
-     */
-    public String resourcesToString() {
-        return stash.toString();
     }
 
     /**
@@ -79,17 +65,6 @@ public class Camp {
             if (b.getCategory() == BuildableCategory.BUILDING && ((Building) b).isDestructible())
                 constructed.remove(b);
         }
-    }
-
-    /**
-     * Returns a string list of all the constructed Buildables that are not destroyed
-     *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
-     */
-    public String constructedToString() {
-        if (constructed.isEmpty()) return EMPTY;
-        return new CollectionStringer().collectionToString(constructed);
     }
 
     /**
@@ -140,25 +115,40 @@ public class Camp {
     }
 
     /**
-     * Returns a string list of all the Buildable the player can currently construct
+     * Returns an unmodifiable list of all the CraftingPlans the player can currently construct
+     * in alphabetically ascending order
      *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
+     * @return unmodifiable list alphabetically ascending
      */
-    public String showBuildables() {
+    public List<CraftingPlan> listPossibleCraftingPlans() {
         final Set<CraftingPlan> plans = workbench.getCraftablePlans(hasFireplace);
 
         for (final Buildable b : constructed) plans.remove(b.getCraftingPlan());
 
-        if (plans.isEmpty()) return EMPTY;
-        final List<String> representations = new LinkedList<>();
-        for (final CraftingPlan plan : plans) {
-            representations.add(plan.toString());
-        }
+        final List<CraftingPlan> alphabeticallySorted = new LinkedList<>(plans);
 
-        representations.sort(Comparator.naturalOrder());
+        alphabeticallySorted.sort(Comparator.comparing(CraftingPlan::toString));
 
-        return new CollectionStringer().collectionToString(representations);
+        return List.copyOf(alphabeticallySorted);
+    }
+
+    /**
+     * Returns all the resources in the stash as unmodifiable list.
+     * They are in descending order of their time of retrieval
+     *
+     * @return Returns unmodifiable list of the resources in the stash in descending order
+     */
+    public List<Resource> resources() {
+        return stash.getElementsDescending();
+    }
+
+    /**
+     * Returns an unmodifiable list of all the constructed Buildables that are not destroyed
+     *
+     * @return Returns an ummodifiable list of all currently available buildables
+     */
+    public List<Buildable> listConstructed() {
+        return List.copyOf(constructed);
     }
 
     /**
@@ -176,6 +166,6 @@ public class Camp {
      * @return returns true if the player can build anything, false otherwise
      */
     public boolean canBuildAnything() {
-        return !showBuildables().equals(EMPTY);
+        return !listPossibleCraftingPlans().isEmpty();
     }
 }

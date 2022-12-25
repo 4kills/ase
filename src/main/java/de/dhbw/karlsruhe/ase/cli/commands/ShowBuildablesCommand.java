@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.cli.commands;
 
+import de.dhbw.karlsruhe.ase.cli.CollectionStringer;
 import de.dhbw.karlsruhe.ase.cli.Terminal;
 import de.dhbw.karlsruhe.ase.game.Command;
 import de.dhbw.karlsruhe.ase.game.GamePhaseException;
@@ -15,7 +16,7 @@ public record ShowBuildablesCommand() implements Command {
     public void execute(final IslandEscapeGame game) {
         final String out;
         try {
-            out = game.showBuildables();
+            out = new CollectionStringer().collectionToString(game.showBuildables());
         } catch (final GamePhaseException e) {
             Terminal.printError(e.getMessage());
             return;

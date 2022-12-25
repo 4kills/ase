@@ -1,6 +1,6 @@
 package de.dhbw.karlsruhe.ase.game.crafting;
 
-import de.dhbw.karlsruhe.ase.game.auxiliaries.CollectionStringer;
+import de.dhbw.karlsruhe.ase.cli.CollectionStringer;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import java.util.Set;
  * @version 1.0
  */
 public class ResourceStash {
-    private static final String EMPTY = "EMPTY";
 
     private final Deque<Resource> stash = new ArrayDeque<>();
     private int protectedResourcesCount = 0;
@@ -87,11 +86,12 @@ public class ResourceStash {
         protectedResourcesCount = n;
     }
 
-    @Override
-    public String toString() {
-        if (stash.isEmpty()) return EMPTY;
+    /**
+     * @return unmodifiable list of the resource stash in descending order
+     */
+    public List<Resource> getElementsDescending() {
         final List<Resource> ascending = new ArrayList<>(stash);
         Collections.reverse(ascending);
-        return new CollectionStringer().collectionToString(ascending);
+        return List.copyOf(ascending);
     }
 }

@@ -1,8 +1,8 @@
 package de.dhbw.karlsruhe.ase.game;
 
-import de.dhbw.karlsruhe.ase.game.auxiliaries.CollectionStringer;
 import de.dhbw.karlsruhe.ase.game.crafting.Camp;
 import de.dhbw.karlsruhe.ase.game.crafting.CraftingPlan;
+import de.dhbw.karlsruhe.ase.game.crafting.Resource;
 import de.dhbw.karlsruhe.ase.game.crafting.ResourceStash;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.Buildable;
 import de.dhbw.karlsruhe.ase.game.crafting.buildables.BuildableCategory;
@@ -14,7 +14,7 @@ import de.dhbw.karlsruhe.ase.game.results.ActionResult;
 import de.dhbw.karlsruhe.ase.game.results.DrawResult;
 import de.dhbw.karlsruhe.ase.game.results.RollResult;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * The controller class that is the only game-logic-implementing class that communicates with the Userinterface
@@ -136,36 +136,33 @@ public final class IslandEscapeGame {
     /**
      * Returns all the Buildables that can be constructed right away (with the next build call)
      *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
+     * @return an unmodifiable list in alphabetically ascending order
      * @throws GamePhaseException if the game phase is not Scavenge
      */
-    public String showBuildables() throws GameStatusException, GamePhaseException {
+    public List<CraftingPlan> showBuildables() throws GameStatusException, GamePhaseException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
         if (phase != GamePhase.SCAVENGE) throw new GamePhaseException(phase, "can be only called when build can");
-        return camp.showBuildables();
+        return camp.listPossibleCraftingPlans();
     }
 
     /**
-     * All the Buildables the player has in possession as string
+     * All the intact Buildables the player has in possession as unmodifiable list
      *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
+     * @return Returns the intact Buildables the player has in possession as unmodifiable list
      */
-    public String listBuildings() throws GameStatusException {
+    public List<Buildable> listBuildings() throws GameStatusException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
-        return camp.constructedToString();
+        return camp.listConstructed();
     }
 
     /**
-     * All the resources the player has in possession as string
+     * All the resources the player has in possession as an unmodifiable list in descending order
      *
-     * @return Returns "EMPTY" or
-     * the list of strings as specified by {@link CollectionStringer#collectionToString(Collection)}
+     * @return unmodifiable list of resources in descending order
      */
-    public String listResources() throws GameStatusException {
+    public List<Resource> listResources() throws GameStatusException {
         if (status != GameStatus.RUNNING) throw new GameStatusException(status);
-        return camp.resourcesToString();
+        return camp.resources();
     }
 
     /**
