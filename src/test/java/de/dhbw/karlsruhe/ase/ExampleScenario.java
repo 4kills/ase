@@ -1,6 +1,6 @@
 package de.dhbw.karlsruhe.ase;
 
-import de.dhbw.karlsruhe.ase.Main;
+import de.dhbw.karlsruhe.ase.plugin.cli.Main;
 import de.dhbw.karlsruhe.testing.Result;
 import de.dhbw.karlsruhe.testing.Tester;
 import org.junit.jupiter.api.Assertions;

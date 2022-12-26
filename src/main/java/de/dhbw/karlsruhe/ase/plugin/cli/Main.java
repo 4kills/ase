@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase;
+package de.dhbw.karlsruhe.ase.plugin.cli;
 
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.plugin.cli.parsers.CommandParser;
