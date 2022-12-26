@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase.integration_tests;
+package de.dhbw.karlsruhe.ase.blackbox_tests;
 
 import java.util.function.Consumer;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-public class EdgeCaseTests1 {
+public class EdgeCaseTests {
 
     private static Consumer<String[]> mainMethod = Main::main;
 
