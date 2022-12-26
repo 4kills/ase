@@ -11,16 +11,12 @@ import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
  * @author Dominik Ochs
  * @version 1.0
  */
-class PossibleRescue extends AbstractBuildable implements Rescue {
+record PossibleRescue(CraftingPlan plan) implements Buildable, Rescue {
     private static final Roll REQUIRED_ROLL = new Roll(DiceType.SIX_SIDED, 4);
 
-    /**
-     * Creates a new PossibleRescue with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public PossibleRescue(final CraftingPlan plan) {
-        super(plan);
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override

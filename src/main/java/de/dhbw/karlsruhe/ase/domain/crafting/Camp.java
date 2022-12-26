@@ -63,7 +63,7 @@ public class Camp implements Serializable {
      */
     public Buildable build(final CraftingPlan plan) throws IllegalActionException {
         for (final Buildable b : constructed)
-            if (b.getCraftingPlan() == plan)
+            if (b.plan() == plan)
                 throw new IllegalActionException("buildable already exists. Building the same thing "
                         + "multiple times is not allowed");
 
@@ -75,15 +75,15 @@ public class Camp implements Serializable {
                 strongestWeapon = (getBonusDamage() < tool.getBonusDamage()) ? tool : strongestWeapon;
                 break;
             case BUILDING:
-                if (crafted.getCraftingPlan() == CraftingPlan.SHACK)
+                if (crafted.plan() == CraftingPlan.SHACK)
                     stash.protectTopMostNResources(((Shack) crafted).getNumberOfProtectedItems());
-                if (crafted.getCraftingPlan() == CraftingPlan.FIREPLACE) hasFireplace = true;
+                if (crafted.plan() == CraftingPlan.FIREPLACE) hasFireplace = true;
                 break;
             case RESCUE:
                 currentEndeavor = (Rescue) crafted;
                 break;
             default:
-                throw new UnsupportedOperationException(crafted.getCraftingPlan() + " not implemented");
+                throw new UnsupportedOperationException(crafted.plan() + " not implemented");
         }
 
         constructed.push(crafted);
@@ -108,7 +108,7 @@ public class Camp implements Serializable {
     public List<CraftingPlan> listPossibleCraftingPlans() {
         final Set<CraftingPlan> plans = workbench.getCraftablePlans(hasFireplace);
 
-        for (final Buildable b : constructed) plans.remove(b.getCraftingPlan());
+        for (final Buildable b : constructed) plans.remove(b.plan());
 
         final List<CraftingPlan> alphabeticallySorted = new LinkedList<>(plans);
 

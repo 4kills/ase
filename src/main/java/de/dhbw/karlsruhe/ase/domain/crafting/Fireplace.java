@@ -7,16 +7,12 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Fireplace extends AbstractBuildable implements Building {
+record Fireplace(CraftingPlan plan) implements Buildable, Building {
     private static final boolean DESTRUCTIBLE = true;
 
-    /**
-     * Creates a new Fireplace with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public Fireplace(final CraftingPlan plan) {
-        super(plan);
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override

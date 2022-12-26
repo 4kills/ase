@@ -8,14 +8,11 @@ import de.dhbw.karlsruhe.ase.domain.dice.Roll;
  * @author Dominik Ochs
  * @version 1.0
  */
-class GuaranteedRescue extends AbstractBuildable implements Rescue {
-    /**
-     * Creates a new GuaranteedRescue with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public GuaranteedRescue(final CraftingPlan plan) {
-        super(plan);
+record GuaranteedRescue(CraftingPlan plan) implements Buildable, Rescue {
+
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override

@@ -7,16 +7,12 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Axe extends AbstractBuildable implements Tool {
+record Axe(CraftingPlan plan) implements Buildable, Tool {
     private static final int BONUS_DAMAGE = 2;
 
-    /**
-     * Creates a new Axe with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public Axe(final CraftingPlan plan) {
-        super(plan);
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override

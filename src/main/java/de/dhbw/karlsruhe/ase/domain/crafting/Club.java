@@ -7,16 +7,12 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Club extends AbstractBuildable implements Tool {
+record Club(CraftingPlan plan) implements Buildable, Tool {
     private static final int BONUS_DAMAGE = 1;
 
-    /**
-     * Creates a new Club with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public Club(final CraftingPlan plan) {
-        super(plan);
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override

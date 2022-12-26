@@ -7,18 +7,9 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Shack extends AbstractBuildable implements Building {
+record Shack(CraftingPlan plan) implements Buildable, Building {
     private static final boolean DESTRUCTIBLE = false;
     private static final int NUMBER_OF_PROTECTED_ITEMS = 5;
-
-    /**
-     * Creates a new Shack with its crafting plan as required by {@link AbstractBuildable}
-     *
-     * @param plan the plan for this Buildable
-     */
-    public Shack(final CraftingPlan plan) {
-        super(plan);
-    }
 
     /**
      * Returns the number of items (resources) this Shack can protect. For shacks this number is
@@ -28,6 +19,11 @@ class Shack extends AbstractBuildable implements Building {
      */
     public int getNumberOfProtectedItems() {
         return NUMBER_OF_PROTECTED_ITEMS;
+    }
+
+    @Override
+    public String toString() {
+        return plan.toString();
     }
 
     @Override
