@@ -16,7 +16,7 @@ import java.util.Iterator;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class RefabDeck<T extends Refabricatable<T>> implements Deck<T> {
+class RefabDeck<T extends Refabricatable<T>> implements Deck<T> {
     private final Deque<T> initial = new ArrayDeque<>();
     private final Deque<T> active = new ArrayDeque<>();
 

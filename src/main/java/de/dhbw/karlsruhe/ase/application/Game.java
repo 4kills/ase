@@ -5,7 +5,6 @@ import de.dhbw.karlsruhe.ase.domain.cards.Card;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
 import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
 import de.dhbw.karlsruhe.ase.domain.crafting.Resource;
-import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 import de.dhbw.karlsruhe.ase.domain.crafting.Buildable;
 import de.dhbw.karlsruhe.ase.domain.crafting.BuildableCategory;
 import de.dhbw.karlsruhe.ase.domain.crafting.Rescue;

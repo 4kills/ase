@@ -1,8 +1,5 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables.rescues;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
-import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
-import de.dhbw.karlsruhe.ase.domain.crafting.Rescue;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
 import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 import de.dhbw.karlsruhe.ase.domain.dice.DiceType;
 import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
@@ -14,7 +11,7 @@ import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class PossibleRescue extends AbstractBuildable implements Rescue {
+class PossibleRescue extends AbstractBuildable implements Rescue {
     private static final Roll REQUIRED_ROLL = new Roll(DiceType.SIX_SIDED, 4);
 
     /**

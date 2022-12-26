@@ -2,7 +2,6 @@ package de.dhbw.karlsruhe.ase.application;
 
 import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
-import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -54,8 +53,7 @@ public class GameState implements GameEndObservable, Serializable {
      * @return a new freshly initialized game state with the same deck and observers as before but new UUID
      */
     public GameState reinitialize() {
-        final ResourceStash stash = new ResourceStash();
-        final Camp camp = new Camp(stash);
+        final Camp camp = new Camp();
 
         var reinitializedState = new GameState();
 
@@ -64,7 +62,7 @@ public class GameState implements GameEndObservable, Serializable {
         reinitializedState.setCamp(camp);
         reinitializedState.setStatus(GameStatus.RUNNING);
         reinitializedState.setPhase(GamePhase.SCAVENGE);
-        reinitializedState.setInvalidator(new CardInvalidator(deck, camp, stash));
+        reinitializedState.setInvalidator(new CardInvalidator(deck, camp));
         return reinitializedState;
     }
 

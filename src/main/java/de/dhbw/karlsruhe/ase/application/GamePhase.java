@@ -6,7 +6,7 @@ package de.dhbw.karlsruhe.ase.application;
  * @author Dominik Ochs
  * @version 1.0
  */
-public enum GamePhase {
+enum GamePhase {
     /**
      * The Scavenge phase, used to build Buildables and draw new cards
      */

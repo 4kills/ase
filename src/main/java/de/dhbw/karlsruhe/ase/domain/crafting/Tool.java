@@ -7,7 +7,7 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-public interface Tool {
+interface Tool {
     /**
      * Returns the bonus damage of this tool added to the player's roll when fighting an animal
      *

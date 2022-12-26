@@ -1,7 +1,6 @@
 package de.dhbw.karlsruhe.ase.domain.crafting;
 
 import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.buildings.Shack;
 
 import java.io.Serializable;
 import java.util.ArrayDeque;
@@ -20,23 +19,13 @@ import java.util.Set;
  * @version 1.0
  */
 public class Camp implements Serializable {
-    private final ResourceStash stash;
-    private final Workbench workbench;
+    private final ResourceStash stash = new ResourceStash();
+    private final Workbench workbench = new Workbench(stash);
     private final Deque<Buildable> constructed = new ArrayDeque<>();
 
     private boolean hasFireplace = false;
     private Tool strongestWeapon;
     private Rescue currentEndeavor;
-
-    /**
-     * Creates a new Camp with the provided stash of resources
-     *
-     * @param stash the stash of resources that already exists
-     */
-    public Camp(final ResourceStash stash) {
-        this.stash = stash;
-        this.workbench = new Workbench(stash);
-    }
 
     /**
      * Ravages the camp by wild animals after the player failed to win against them.
@@ -154,6 +143,13 @@ public class Camp implements Serializable {
      */
     public Rescue getCurrentEndeavor() {
         return currentEndeavor;
+    }
+
+    /**
+     * @param r adds the given resource r to the resource stash
+     */
+    public void addResource(Resource r) {
+        stash.add(r);
     }
 
     /**

@@ -1,8 +1,4 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables.buildings;
-
-import de.dhbw.karlsruhe.ase.domain.crafting.Building;
-import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
 /**
  * A Shack models a Buildable used for protecting resources from being ravaged or devastated. A shack
@@ -11,7 +7,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class Shack extends AbstractBuildable implements Building {
+class Shack extends AbstractBuildable implements Building {
     private static final boolean DESTRUCTIBLE = false;
     private static final int NUMBER_OF_PROTECTED_ITEMS = 5;
 

@@ -1,8 +1,4 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables.tools;
-
-import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
-import de.dhbw.karlsruhe.ase.domain.crafting.Tool;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
 /**
  * Creates a new Buildable implementing the {@link Tool} interface.
@@ -11,7 +7,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class Club extends AbstractBuildable implements Tool {
+class Club extends AbstractBuildable implements Tool {
     private static final int BONUS_DAMAGE = 1;
 
     /**

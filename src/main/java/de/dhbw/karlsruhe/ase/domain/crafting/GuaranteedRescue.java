@@ -1,8 +1,5 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables.rescues;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
-import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
-import de.dhbw.karlsruhe.ase.domain.crafting.Rescue;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
 import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 
 /**
@@ -11,7 +8,7 @@ import de.dhbw.karlsruhe.ase.domain.dice.Roll;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class GuaranteedRescue extends AbstractBuildable implements Rescue {
+class GuaranteedRescue extends AbstractBuildable implements Rescue {
     /**
      * Creates a new GuaranteedRescue with its crafting plan as required by {@link AbstractBuildable}
      *

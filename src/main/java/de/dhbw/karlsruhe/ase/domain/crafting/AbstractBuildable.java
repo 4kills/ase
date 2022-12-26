@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
 import de.dhbw.karlsruhe.ase.domain.crafting.Buildable;
 import de.dhbw.karlsruhe.ase.domain.crafting.BuildableCategory;
@@ -11,7 +11,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
  * @author Dominik Ochs
  * @version 1.0
  */
-public abstract class AbstractBuildable implements Buildable {
+abstract class AbstractBuildable implements Buildable {
     private final CraftingPlan plan;
 
     /**
@@ -19,7 +19,7 @@ public abstract class AbstractBuildable implements Buildable {
      *
      * @param plan the plan of the concrete Buildable implementation
      */
-    protected AbstractBuildable(final CraftingPlan plan) {
+    AbstractBuildable(final CraftingPlan plan) {
         this.plan = plan;
     }
 

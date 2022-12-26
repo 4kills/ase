@@ -7,7 +7,7 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * @author Dominik Ochs
  * @version 1.0
  */
-public interface Building {
+interface Building {
     /**
      * Returns whether this Building ist destructible or indestructible
      *

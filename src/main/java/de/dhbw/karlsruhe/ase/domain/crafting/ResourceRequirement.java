@@ -8,19 +8,14 @@ import de.dhbw.karlsruhe.ase.domain.cards.Refabricatable;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class ResourceRequirement implements Refabricatable<ResourceRequirement> {
-    private final Resource resource;
-    private final int amount;
-
+record ResourceRequirement(Resource resource, int amount) implements Refabricatable<ResourceRequirement> {
     /**
      * Creates a new ResourceRequirement with the required resource and its quantity
      *
      * @param resource the required resource
      * @param amount   its quantity
      */
-    ResourceRequirement(final Resource resource, final int amount) {
-        this.resource = resource;
-        this.amount = amount;
+    ResourceRequirement {
     }
 
     /**
@@ -28,7 +23,8 @@ public class ResourceRequirement implements Refabricatable<ResourceRequirement> 
      *
      * @return the resource
      */
-    public Resource getResource() {
+    @Override
+    public Resource resource() {
         return resource;
     }
 
@@ -37,7 +33,8 @@ public class ResourceRequirement implements Refabricatable<ResourceRequirement> 
      *
      * @return the quantity as integer
      */
-    public int getAmount() {
+    @Override
+    public int amount() {
         return amount;
     }
 

@@ -1,8 +1,4 @@
-package de.dhbw.karlsruhe.ase.domain.crafting.buildables.buildings;
-
-import de.dhbw.karlsruhe.ase.domain.crafting.Building;
-import de.dhbw.karlsruhe.ase.domain.crafting.CraftingPlan;
-import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
+package de.dhbw.karlsruhe.ase.domain.crafting;
 
 /**
  * A fireplace models a Buildable used for creating GuaranteedRescues.
@@ -11,7 +7,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.buildables.AbstractBuildable;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class Fireplace extends AbstractBuildable implements Building {
+class Fireplace extends AbstractBuildable implements Building {
     private static final boolean DESTRUCTIBLE = true;
 
     /**

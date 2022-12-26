@@ -3,7 +3,6 @@ package de.dhbw.karlsruhe.ase.application;
 import de.dhbw.karlsruhe.ase.domain.cards.Card;
 import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
-import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 
 import java.io.Serializable;
 
@@ -16,7 +15,6 @@ import java.io.Serializable;
 class CardInvalidator implements Serializable {
     private final CardDeck deck;
     private final Camp camp;
-    private final ResourceStash stash;
 
     private boolean depleted;
     private Card lastDraw;
@@ -26,12 +24,10 @@ class CardInvalidator implements Serializable {
      *
      * @param deck  card deck of the game
      * @param camp  camp of the game
-     * @param stash the resource stash of the game
      */
-    CardInvalidator(final CardDeck deck, final Camp camp, final ResourceStash stash) {
+    CardInvalidator(final CardDeck deck, final Camp camp) {
         this.deck = deck;
         this.camp = camp;
-        this.stash = stash;
         depleted = deck.isDepleted();
     }
 
@@ -68,7 +64,7 @@ class CardInvalidator implements Serializable {
 
         switch (card.getCategory()) {
             case RESOURCE:
-                stash.add(card.getResource());
+                camp.addResource(card.getResource());
                 break;
             case ANIMAL:
                 lastDraw = card;

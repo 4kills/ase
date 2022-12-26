@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * This class models all of the player's collected resources. It can be devastated or ravaged
+ * This class models all the player's collected resources. It can be devastated or ravaged
  * by catastrophes or animals respectively. Its contents can be used for crafting.
  *
  * @author Dominik Ochs
  * @version 1.0
  */
-public class ResourceStash implements Serializable {
+class ResourceStash implements Serializable {
 
     private final Deque<Resource> stash = new ArrayDeque<>();
     private int protectedResourcesCount = 0;
@@ -30,8 +30,8 @@ public class ResourceStash implements Serializable {
      */
     public void consumeResources(final Set<ResourceRequirement> required) {
         for (final ResourceRequirement reqRes : required) {
-            for (int i = 0; i < reqRes.getAmount(); i++) {
-                stash.removeFirstOccurrence(reqRes.getResource());
+            for (int i = 0; i < reqRes.amount(); i++) {
+                stash.removeFirstOccurrence(reqRes.resource());
             }
         }
     }
@@ -46,9 +46,9 @@ public class ResourceStash implements Serializable {
         for (final ResourceRequirement reqRes : required) {
             int actual = 0;
             for (final Resource res : stash) {
-                if (res.equals(reqRes.getResource())) actual++;
+                if (res.equals(reqRes.resource())) actual++;
             }
-            if (actual < reqRes.getAmount()) return false;
+            if (actual < reqRes.amount()) return false;
         }
         return true;
     }
