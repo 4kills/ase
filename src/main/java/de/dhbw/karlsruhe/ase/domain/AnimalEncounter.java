@@ -5,6 +5,7 @@ import de.dhbw.karlsruhe.ase.domain.cards.CardCategory;
 import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 import de.dhbw.karlsruhe.ase.domain.dice.DiceType;
 import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
+import de.dhbw.karlsruhe.ase.domain.dice.RollInteger;
 
 /**
  * Immutable.
@@ -18,15 +19,15 @@ public enum AnimalEncounter {
     /**
      * A spider which is the easiest encounter. Requiring a three roll or higher with a four sided dice
      */
-    SPIDER(new Roll(DiceType.FOUR_SIDED, 2)),
+    SPIDER(new Roll(DiceType.FOUR_SIDED, new RollInteger(2))),
     /**
      * A snake which is a medium encounter. Requiring a four roll or higher with a six sided dice
      */
-    SNAKE(new Roll(DiceType.SIX_SIDED, 3)),
+    SNAKE(new Roll(DiceType.SIX_SIDED, new RollInteger(3))),
     /**
      * A tiger which is the hardest encounter. Requiring a five roll or higher with an eight sided dice
      */
-    TIGER(new Roll(DiceType.EIGHT_SIDED, 4));
+    TIGER(new Roll(DiceType.EIGHT_SIDED, new RollInteger(4)));
 
     private final Roll requiredRoll;
 
@@ -50,7 +51,7 @@ public enum AnimalEncounter {
     public boolean fight(final Roll roll) throws InvalidDiceException {
         if (roll.type() != requiredRoll.type())
             throw new InvalidDiceException(requiredRoll, roll);
-        return roll.roll() > requiredRoll.roll();
+        return roll.roll().value() > requiredRoll.roll().value();
     }
 
     /**

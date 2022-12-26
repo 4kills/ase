@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.dice;
 
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+
 /**
  * Immutable.
  * A roll represents a dice type as well as the rolled number
@@ -7,7 +9,7 @@ package de.dhbw.karlsruhe.ase.domain.dice;
  * @author Dominik Ochs
  * @version 1.0
  */
-public record Roll(DiceType type, int roll) {
+public record Roll(DiceType type, RollInteger roll) {
     /**
      * Creates a new dice with the dice type and the roll
      *
@@ -15,9 +17,7 @@ public record Roll(DiceType type, int roll) {
      * @param roll the roll with that dice
      */
     public Roll {
-        if (roll < 1 || type.integerRepresentation < roll)
-            throw new IllegalArgumentException("roll must be 1 <= roll <= diceType, roll was "
-                    + roll + " with type " + type);
+        new RollInteger(roll.value(), type); // checks validity for specified dice
     }
 
     /**
@@ -26,8 +26,8 @@ public record Roll(DiceType type, int roll) {
      * @param amount to raise the roll by
      * @return new valid roll
      */
-    public Roll raiseRollBy(int amount) {
-        return new Roll(type, Math.min(roll + amount, type.integerRepresentation));
+    public Roll raiseRollBy(NonNegativeInteger amount) {
+        return new Roll(type, RollInteger.fromNumberCapped(roll.value() + amount.value(), type));
     }
 
     /**
@@ -43,10 +43,10 @@ public record Roll(DiceType type, int roll) {
     /**
      * The roll associated with this dice
      *
-     * @return roll as integer
+     * @return roll as {@link RollInteger}
      */
     @Override
-    public int roll() {
+    public RollInteger roll() {
         return roll;
     }
 }

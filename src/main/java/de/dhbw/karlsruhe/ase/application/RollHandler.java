@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.application;
 
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
 import de.dhbw.karlsruhe.ase.domain.AnimalEncounter;
 import de.dhbw.karlsruhe.ase.domain.cards.Card;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
@@ -58,7 +59,7 @@ public class RollHandler {
      */
     private void encounter(final Roll roll) throws InvalidDiceException {
         final AnimalEncounter encounter = AnimalEncounter.fromCard(lastCard);
-        if (encounter.fight(roll.raiseRollBy(camp.getBonusDamage()))) {
+        if (encounter.fight(roll.raiseRollBy(new NonNegativeInteger(camp.getBonusDamage())))) {
             outcome = OutcomeType.SURVIVED;
             return;
         }

@@ -10,23 +10,23 @@ public enum DiceType {
     /**
      * A four sided dice
      */
-    FOUR_SIDED(4),
+    FOUR_SIDED(new RollInteger(4)),
     /**
      * A six sided dice
      */
-    SIX_SIDED(6),
+    SIX_SIDED(new RollInteger(6)),
     /**
      * An eight sided dice
      */
-    EIGHT_SIDED(8);
+    EIGHT_SIDED(new RollInteger(8));
 
     /**
      * Integer value representing the number of sides of the dice
      */
-    public final int integerRepresentation;
+    public final RollInteger integerRepresentation;
 
 
-    DiceType(int integerRepresentation) {
+    DiceType(RollInteger integerRepresentation) {
         this.integerRepresentation = integerRepresentation;
     }
 }

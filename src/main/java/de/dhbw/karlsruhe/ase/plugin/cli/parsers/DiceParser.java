@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.plugin.cli.parsers;
 
+import de.dhbw.karlsruhe.ase.domain.dice.RollInteger;
 import de.dhbw.karlsruhe.ase.plugin.cli.Parser;
 import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 import de.dhbw.karlsruhe.ase.domain.dice.DiceType;
@@ -30,7 +31,7 @@ public final class DiceParser implements Parser<Roll, Matcher> {
             roll = raw.group(6);
         }
 
-        return new Roll(diceType, Integer.parseInt(roll));
+        return new Roll(diceType, new RollInteger(Integer.parseInt(roll)));
     }
 
 }
