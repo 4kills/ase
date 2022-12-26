@@ -3,13 +3,7 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
 import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A camp represents the base of the player's operations. It contains all the buildings as well as a stash of
@@ -19,6 +13,9 @@ import java.util.Set;
  * @version 1.0
  */
 public class Camp implements Serializable {
+
+    private final UUID uuid;
+
     private final ResourceStash stash = new ResourceStash();
     private final Workbench workbench = new Workbench(stash);
     private final Deque<Buildable> constructed = new ArrayDeque<>();
@@ -26,6 +23,10 @@ public class Camp implements Serializable {
     private boolean hasFireplace = false;
     private Tool strongestWeapon;
     private Rescue currentEndeavor;
+
+    public Camp(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     /**
      * Ravages the camp by wild animals after the player failed to win against them.
@@ -159,5 +160,18 @@ public class Camp implements Serializable {
      */
     public boolean canBuildAnything() {
         return !listPossibleCraftingPlans().isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Camp camp = (Camp) o;
+        return uuid.equals(camp.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 }

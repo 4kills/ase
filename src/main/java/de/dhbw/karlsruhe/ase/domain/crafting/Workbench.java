@@ -5,6 +5,7 @@ import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * A workbench is the place in the camp to craft Buildables at. It provides methods to
@@ -13,8 +14,7 @@ import java.util.Set;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Workbench implements Serializable {
-    private final ResourceStash stash;
+record Workbench(ResourceStash stash) implements Serializable {
 
     /**
      * Creates a new Workbench with the provided ResourceStash

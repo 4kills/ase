@@ -53,10 +53,9 @@ public class GameState implements GameEndObservable, Serializable {
      * @return a new freshly initialized game state with the same deck and observers as before but new UUID
      */
     public GameState reinitialize() {
-        final Camp camp = new Camp();
-
         var reinitializedState = new GameState();
 
+        final Camp camp = new Camp(reinitializedState.getUuid());
         this.observers.forEach(reinitializedState::register);
         reinitializedState.setDeck(deck);
         reinitializedState.setCamp(camp);
