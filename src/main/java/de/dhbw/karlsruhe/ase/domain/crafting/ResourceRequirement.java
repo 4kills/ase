@@ -1,6 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.crafting;
 
-import de.dhbw.karlsruhe.ase.domain.cards.Refabricatable;
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+import de.dhbw.karlsruhe.ase.abstraction.Refabricatable;
 
 /**
  * This immutable class is used to describe the resource requirements of a Buildable
@@ -8,7 +9,7 @@ import de.dhbw.karlsruhe.ase.domain.cards.Refabricatable;
  * @author Dominik Ochs
  * @version 1.0
  */
-record ResourceRequirement(Resource resource, int amount) implements Refabricatable<ResourceRequirement> {
+record ResourceRequirement(Resource resource, NonNegativeInteger amount) implements Refabricatable<ResourceRequirement> {
     /**
      * Creates a new ResourceRequirement with the required resource and its quantity
      *
@@ -34,7 +35,7 @@ record ResourceRequirement(Resource resource, int amount) implements Refabricata
      * @return the quantity as integer
      */
     @Override
-    public int amount() {
+    public NonNegativeInteger amount() {
         return amount;
     }
 

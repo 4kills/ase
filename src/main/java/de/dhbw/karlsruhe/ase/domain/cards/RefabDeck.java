@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import de.dhbw.karlsruhe.ase.abstraction.Refabricatable;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;

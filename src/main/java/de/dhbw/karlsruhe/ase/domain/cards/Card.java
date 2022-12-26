@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import de.dhbw.karlsruhe.ase.abstraction.Refabricatable;
 import de.dhbw.karlsruhe.ase.domain.crafting.Resource;
 
 import java.util.Locale;

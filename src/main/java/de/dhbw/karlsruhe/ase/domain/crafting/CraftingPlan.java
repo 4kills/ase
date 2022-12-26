@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.crafting;
 
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -17,60 +19,60 @@ public enum CraftingPlan {
      * An axe used to defend against animals
      */
     AXE(BuildableCategory.TOOL, false,
-            new ResourceRequirement(Resource.METAL, 3)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(3))),
 
     /**
      * A club used to defend against animals
      */
     CLUB(BuildableCategory.TOOL, false,
-            new ResourceRequirement(Resource.WOOD, 3)),
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(3))),
 
     /**
      * A shack used to protect resources
      */
     SHACK(BuildableCategory.BUILDING, false,
-            new ResourceRequirement(Resource.WOOD, 2),
-            new ResourceRequirement(Resource.METAL, 1),
-            new ResourceRequirement(Resource.PLASTIC, 2)),
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(2)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(1)),
+            new ResourceRequirement(Resource.PLASTIC, new NonNegativeInteger(2))),
 
     /**
      * A fireplace used to craft higher level Buildables
      */
     FIREPLACE(BuildableCategory.BUILDING, false,
-            new ResourceRequirement(Resource.WOOD, 3),
-            new ResourceRequirement(Resource.METAL, 1)),
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(3)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(1))),
 
     /**
      * A sailingraft used to try to escape the island
      */
     SAILINGRAFT(BuildableCategory.RESCUE, false,
-            new ResourceRequirement(Resource.WOOD, 4),
-            new ResourceRequirement(Resource.METAL, 2),
-            new ResourceRequirement(Resource.PLASTIC, 2)),
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(4)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(2)),
+            new ResourceRequirement(Resource.PLASTIC, new NonNegativeInteger(2))),
 
     /**
      * A hangglider used to try to escape the island
      */
     HANGGLIDER(BuildableCategory.RESCUE, false,
-            new ResourceRequirement(Resource.WOOD, 2),
-            new ResourceRequirement(Resource.METAL, 2),
-            new ResourceRequirement(Resource.PLASTIC, 4)),
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(2)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(2)),
+            new ResourceRequirement(Resource.PLASTIC, new NonNegativeInteger(4))),
 
     /**
      * A steamboat that is essentially the more powerful version of a {@link #SAILINGRAFT}
      * requiring a fireplace to build. Rescue ensured.
      */
     STEAMBOAT(BuildableCategory.RESCUE, true,
-            new ResourceRequirement(Resource.METAL, 6),
-            new ResourceRequirement(Resource.PLASTIC, 1)),
+            new ResourceRequirement(Resource.METAL, new NonNegativeInteger(6)),
+            new ResourceRequirement(Resource.PLASTIC, new NonNegativeInteger(1))),
 
     /**
      * A Ballon that is essentially the more powerful version of a {@link #HANGGLIDER}
      * requiring a fireplace to build. Rescue ensured.
      */
     BALLON(BuildableCategory.RESCUE, true,
-            new ResourceRequirement(Resource.WOOD, 1),
-            new ResourceRequirement(Resource.PLASTIC, 6));
+            new ResourceRequirement(Resource.WOOD, new NonNegativeInteger(1)),
+            new ResourceRequirement(Resource.PLASTIC, new NonNegativeInteger(6)));
 
     private final BuildableCategory category;
     private final Set<ResourceRequirement> requirements;

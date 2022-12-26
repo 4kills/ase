@@ -1,10 +1,13 @@
-package de.dhbw.karlsruhe.ase.domain.cards;
+package de.dhbw.karlsruhe.ase.abstraction;
 
 /**
  * A class implementing this interface allows to refabricate its instances, meaning that
  * e.equals(e.refabricate()) will always return true if e is a refabricatable, but changes made to
  * e will not reflect in its refabricated version.
  * This interface is similar to {@link Cloneable}
+ * but it can be used with generic types
+ * (where the compiler fails because it is not guaranteed that {@link Object#clone()}
+ * has been overridden to be accessible).
  *
  * @param <T> The type of refabricatable
  * @author Dominik Ochs

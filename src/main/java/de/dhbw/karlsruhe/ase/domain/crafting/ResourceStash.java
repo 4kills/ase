@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.crafting;
 
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.Set;
 class ResourceStash implements Serializable {
 
     private final Deque<Resource> stash = new ArrayDeque<>();
-    private int protectedResourcesCount = 0;
+    private NonNegativeInteger protectedResourcesCount = new NonNegativeInteger(0);
 
     /**
      * Removes the provided resources from the stash. The resource type and its quantity is defined through
@@ -30,7 +32,7 @@ class ResourceStash implements Serializable {
      */
     public void consumeResources(final Set<ResourceRequirement> required) {
         for (final ResourceRequirement reqRes : required) {
-            for (int i = 0; i < reqRes.amount(); i++) {
+            for (int i = 0; i < reqRes.amount().value(); i++) {
                 stash.removeFirstOccurrence(reqRes.resource());
             }
         }
@@ -48,7 +50,7 @@ class ResourceStash implements Serializable {
             for (final Resource res : stash) {
                 if (res.equals(reqRes.resource())) actual++;
             }
-            if (actual < reqRes.amount()) return false;
+            if (actual < reqRes.amount().value()) return false;
         }
         return true;
     }
@@ -67,11 +69,11 @@ class ResourceStash implements Serializable {
     /**
      * Devastates the stash, meaning it will destroy all resources not being protected by a shack-type building.
      * The number of protected resources is zero by default but can be changed with
-     * {@link #protectTopMostNResources(int)}
+     * {@link #protectTopMostNResources(NonNegativeInteger)}
      */
     public void devastate() {
         final int size = stash.size();
-        for (int i = 0; i < size - protectedResourcesCount; i++)
+        for (int i = 0; i < size - protectedResourcesCount.value(); i++)
             stash.removeLast();
     }
 
@@ -81,7 +83,7 @@ class ResourceStash implements Serializable {
      *
      * @param n the number of resources to save from the top of the stash.
      */
-    public void protectTopMostNResources(final int n) {
+    public void protectTopMostNResources(final NonNegativeInteger n) {
         protectedResourcesCount = n;
     }
 

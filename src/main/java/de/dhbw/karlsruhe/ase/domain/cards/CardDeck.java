@@ -1,6 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
-import java.io.Serializable;
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -58,15 +59,15 @@ public class CardDeck implements Deck<Card> {
      * @return true if the deck is valid and ready to use in the game, false otherwise
      */
     public boolean isValid() {
-        final Map<Card, Integer> cardOccurrences = new HashMap<>();
+        final Map<Card, NonNegativeInteger> cardOccurrences = new HashMap<>();
 
         for (Card card : Card.values()) {
-            cardOccurrences.put(card, 0);
+            cardOccurrences.put(card, new NonNegativeInteger(0));
         }
 
         for (final Card card : this) {
-            Integer amount = cardOccurrences.get(card);
-            cardOccurrences.put(card, amount + 1);
+            NonNegativeInteger amount = cardOccurrences.get(card);
+            cardOccurrences.put(card, amount.add(1));
         }
 
         return config.withoutZeroOccurrenceEntries().equals(
@@ -77,12 +78,12 @@ public class CardDeck implements Deck<Card> {
      * Default configuration for the card deck as used by the default constructor
      */
     public static final CardDeckConfiguration DEFAULT_CONFIGURATION = new CardDeckConfiguration(
-            Map.of(Card.WOOD, 16,
-                    Card.METAL, 16,
-                    Card.PLASTIC, 16,
-                    Card.SPIDER, 5,
-                    Card.SNAKE, 5,
-                    Card.TIGER, 5,
-                    Card.THUNDERSTORM, 1)
+            Map.of(Card.WOOD, new NonNegativeInteger(16),
+                    Card.METAL, new NonNegativeInteger(16),
+                    Card.PLASTIC, new NonNegativeInteger(16),
+                    Card.SPIDER, new NonNegativeInteger(5),
+                    Card.SNAKE, new NonNegativeInteger(5),
+                    Card.TIGER, new NonNegativeInteger(5),
+                    Card.THUNDERSTORM, new NonNegativeInteger(1))
     );
 }

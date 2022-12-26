@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +13,10 @@ import java.util.Map;
  * @param cardOccurrences map of occurrences (card -> number of occurrences [0, inf) ).
  *                        Will be converted to an unmodifiable map to ensure immutability.
  */
-public record CardDeckConfiguration(Map<Card, Integer> cardOccurrences) implements Serializable {
+public record CardDeckConfiguration(Map<Card, NonNegativeInteger> cardOccurrences) implements Serializable {
 
     public CardDeckConfiguration {
         cardOccurrences = Map.copyOf(cardOccurrences); // Ensures deep immutability
-        cardOccurrences.forEach((card, amount) -> {
-            if (amount < 0)
-                throw new IllegalArgumentException("Negative Card occurences are not permitted, " +
-                        "for card: " + card + " amount: " + amount); });
     }
 
     /**
@@ -28,10 +26,10 @@ public record CardDeckConfiguration(Map<Card, Integer> cardOccurrences) implemen
      * occurrence cards exist as (card, 0) tuple or not at all in the mapping
      */
     public CardDeckConfiguration withoutZeroOccurrenceEntries() {
-        final Map<Card, Integer> newOccurrences = new HashMap<>();
+        final Map<Card, NonNegativeInteger> newOccurrences = new HashMap<>();
 
         cardOccurrences.forEach((card, amount) -> {
-            if (amount == 0) return;
+            if (amount.value() == 0) return;
             newOccurrences.put(card, amount);
         });
 
