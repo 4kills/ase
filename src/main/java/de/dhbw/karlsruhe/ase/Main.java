@@ -1,11 +1,11 @@
 package de.dhbw.karlsruhe.ase;
 
-import de.dhbw.karlsruhe.ase.cli.ErrorBuilder;
-import de.dhbw.karlsruhe.ase.cli.parsers.CommandParser;
-import de.dhbw.karlsruhe.ase.cli.Terminal;
-import de.dhbw.karlsruhe.ase.cli.commands.QuitCommand;
-import de.dhbw.karlsruhe.ase.game.Command;
-import de.dhbw.karlsruhe.ase.game.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
+import de.dhbw.karlsruhe.ase.plugin.cli.parsers.CommandParser;
+import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
+import de.dhbw.karlsruhe.ase.plugin.cli.commands.QuitCommand;
+import de.dhbw.karlsruhe.ase.plugin.cli.Command;
+import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
 
 import java.io.IOException;
 

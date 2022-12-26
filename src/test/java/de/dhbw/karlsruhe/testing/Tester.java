@@ -1,6 +1,6 @@
 package de.dhbw.karlsruhe.testing;
 
-import de.dhbw.karlsruhe.ase.cli.Terminal;
+import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
