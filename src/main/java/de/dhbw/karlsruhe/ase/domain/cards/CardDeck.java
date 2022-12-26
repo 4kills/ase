@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

@@ -4,6 +4,7 @@ import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
 import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -13,9 +14,9 @@ import java.util.UUID;
  * This entity bundles the game state with an uuid to identify the save game.
  * It updates observers of the game end.
  */
-class GameState implements GameEndObservable {
+public class GameState implements GameEndObservable, Serializable {
 
-    private final UUID uuid = UUID.randomUUID();
+    private final UUID uuid;
 
     private final List<GameEndObserver> observers = new LinkedList<>();
 
@@ -25,6 +26,14 @@ class GameState implements GameEndObservable {
     private GameResult result = GameResult.NONE;
     private CardDeck deck;
     private Camp camp;
+
+    public GameState(final UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public GameState() {
+        this(UUID.randomUUID());
+    }
 
     @Override
     public void register(GameEndObserver observer) {

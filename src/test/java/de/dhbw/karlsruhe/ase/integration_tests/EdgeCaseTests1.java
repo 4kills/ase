@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase;
+package de.dhbw.karlsruhe.ase.integration_tests;
 
 import java.util.function.Consumer;
 
@@ -1213,7 +1213,7 @@ public class EdgeCaseTests1 {
 
     @Test
     void resetTest() {
-        // this does not test if everything is reseted
+        // this does not test_write_game.sav if everything is reseted
         // an idea would be to replace every quit with reset
         final Result actual = Tester.testAllCmds(mainMethod,
                 "start wood,wood,wood,plastic,spider,plastic,metal,wood,wood,metal,snake,metal,metal,metal,tiger,snake,wood,thunderstorm,wood,metal,metal,wood,wood,plastic,plastic,spider,spider,wood,metal,metal,plastic,plastic,wood,tiger,plastic,plastic,snake,plastic,wood,plastic,metal,tiger,plastic,wood,plastic,wood,metal,plastic,wood,plastic,metal,plastic,metal,spider,metal,tiger,wood,spider,snake,snake,tiger,metal,metal,plastic",
@@ -1244,7 +1244,7 @@ public class EdgeCaseTests1 {
 
     @Test
     void reset_startTest() {
-        // this does not test if everything is reseted
+        // this does not test_write_game.sav if everything is reseted
         // an idea would be to replace every quit with reset
         final Result actual = Tester.testAllCmds(mainMethod,
                 "start wood,metal,wood,plastic,spider,plastic,wood,wood,wood,metal,snake,metal,metal,metal,tiger,snake,wood,thunderstorm,wood,metal,metal,wood,wood,plastic,plastic,spider,spider,wood,metal,metal,plastic,plastic,wood,tiger,plastic,plastic,snake,plastic,wood,plastic,metal,tiger,plastic,wood,plastic,wood,metal,plastic,wood,plastic,metal,plastic,metal,spider,metal,tiger,wood,spider,snake,snake,tiger,metal,metal,plastic",

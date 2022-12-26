@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase;
+package de.dhbw.karlsruhe.ase.integration_tests;
 
 import de.dhbw.karlsruhe.ase.plugin.cli.Main;
 import de.dhbw.karlsruhe.testing.Result;

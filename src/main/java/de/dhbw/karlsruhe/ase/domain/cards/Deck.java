@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import java.io.Serializable;
+
 /**
  * This interface specifies the Deck-type data structure.
  * A Deck is basically a double ended queue with the special property
@@ -9,7 +11,7 @@ package de.dhbw.karlsruhe.ase.domain.cards;
  * @author Dominik Ochs
  * @version 1.0
  */
-interface Deck<T> extends Iterable<T> {
+interface Deck<T> extends Iterable<T>, Serializable {
     /**
      * Reset restores the initial state of the deck, meaning it "refills" the actual collection with the
      * initial one.

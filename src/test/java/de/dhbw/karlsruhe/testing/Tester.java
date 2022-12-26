@@ -45,7 +45,7 @@ public abstract class Tester {
     }
 
     /**
-     * Returns whether the previous call to test the main method has timeouted in the sense of
+     * Returns whether the previous call to test_write_game.sav the main method has timeouted in the sense of
      * {@link #setTimeout(long)} and {@link #getTimeout()}.
      *
      * @return true if it has timeouted, false otherwise

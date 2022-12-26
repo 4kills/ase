@@ -5,13 +5,15 @@ import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.domain.crafting.Camp;
 import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 
+import java.io.Serializable;
+
 /**
  * This class invalidates the drawn cars, meaning it handles the cards' effects
  *
  * @author Dominik Ochs
  * @version 1.0
  */
-class CardInvalidator {
+class CardInvalidator implements Serializable {
     private final CardDeck deck;
     private final Camp camp;
     private final ResourceStash stash;

@@ -3,7 +3,9 @@ package de.dhbw.karlsruhe.ase.plugin.cli;
 import de.dhbw.karlsruhe.ase.application.GameEndObserver;
 import de.dhbw.karlsruhe.ase.application.GameResult;
 
-public class GameEndReporter implements GameEndObserver {
+import java.io.Serializable;
+
+public class GameEndReporter implements GameEndObserver, Serializable {
 
     private GameResult resultToReport = GameResult.NONE;
 

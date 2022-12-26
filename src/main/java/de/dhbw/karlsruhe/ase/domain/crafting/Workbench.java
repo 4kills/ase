@@ -8,6 +8,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.buildables.rescues.PossibleRescue;
 import de.dhbw.karlsruhe.ase.domain.crafting.buildables.tools.Axe;
 import de.dhbw.karlsruhe.ase.domain.crafting.buildables.tools.Club;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import java.util.Set;
  * @author Dominik Ochs
  * @version 1.0
  */
-class Workbench {
+class Workbench implements Serializable {
     private final ResourceStash stash;
 
     /**

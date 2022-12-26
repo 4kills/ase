@@ -13,6 +13,7 @@ import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
 import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,8 +26,12 @@ import java.util.List;
 public final class Game {
 
     private GameState state;
+    private final PersistenceReader loader;
+    private final PersistenceWriter saver;
 
-    public Game(List<GameEndObserver> observers) {
+    public Game(List<GameEndObserver> observers, PersistenceWriter saver, PersistenceReader loader) {
+        this.saver = saver;
+        this.loader = loader;
         state = new GameState();
         observers.forEach(o -> state.register(o));
     }
@@ -176,6 +181,24 @@ public final class Game {
         if (state.getStatus() != GameStatus.RUNNING) throw new GameStatusException(state.getStatus());
 
         return state.getCamp().resources();
+    }
+
+    /**
+     * Persistently saves the game so that it can be loaded at a later stage.
+     * @throws GameStatusException if the game status is not RUNNING
+     * (saving an ended or uninitialized game makes no sense)
+     */
+    public void saveGame() throws GameStatusException, IOException {
+        if (state.getStatus() != GameStatus.RUNNING) throw new GameStatusException(state.getStatus());
+
+        saver.write(state);
+    }
+
+    /**
+     * Loads the game from a persistent medium to retrieve an earlier game state which ist then applied immediately.
+     */
+    public void loadGame() throws IOException {
+        state = loader.read();
     }
 
     private void checkLose() {

@@ -25,7 +25,7 @@ public final class Result {
 
     /**
      * Creates a new Result that has n-times {@link #ERR} as its entries. This is especially useful if you
-     * want to test for a bunch of error-reports of the tested CLI-Application
+     * want to test_write_game.sav for a bunch of error-reports of the tested CLI-Application
      * @param n The number of expected Errors
      * @return The result with n-errors
      */

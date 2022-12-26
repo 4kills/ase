@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.domain.cards;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * @param cardOccurrences map of occurrences (card -> number of occurrences [0, inf) ).
  *                        Will be converted to an unmodifiable map to ensure immutability.
  */
-public record CardDeckConfiguration(Map<Card, Integer> cardOccurrences) {
+public record CardDeckConfiguration(Map<Card, Integer> cardOccurrences) implements Serializable {
 
     public CardDeckConfiguration {
         cardOccurrences = Map.copyOf(cardOccurrences); // Ensures deep immutability

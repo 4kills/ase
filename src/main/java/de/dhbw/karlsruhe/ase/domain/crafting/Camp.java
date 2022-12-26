@@ -3,6 +3,7 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
 import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
 import de.dhbw.karlsruhe.ase.domain.crafting.buildables.buildings.Shack;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Comparator;
 import java.util.Deque;
@@ -18,7 +19,7 @@ import java.util.Set;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class Camp {
+public class Camp implements Serializable {
     private final ResourceStash stash;
     private final Workbench workbench;
     private final Deque<Buildable> constructed = new ArrayDeque<>();

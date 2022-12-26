@@ -3,6 +3,7 @@ package de.dhbw.karlsruhe.ase.plugin.cli;
 import de.dhbw.karlsruhe.ase.plugin.cli.parsers.CommandParser;
 import de.dhbw.karlsruhe.ase.plugin.cli.commands.QuitCommand;
 import de.dhbw.karlsruhe.ase.application.Game;
+import de.dhbw.karlsruhe.ase.plugin.localpersistence.SerializationFilePersistor;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,8 +24,9 @@ public abstract class Main {
         final var quit = new QuitCommand();
         final var parser = new CommandParser();
         final var gameEndReport = new GameEndReporter();
+        final var filePersistor = new SerializationFilePersistor(CommonOutput.PATH);
 
-        final Game game = new Game(List.of(gameEndReport));
+        final Game game = new Game(List.of(gameEndReport), filePersistor, filePersistor);
 
         Command command = null;
         String raw;

@@ -1,5 +1,6 @@
 package de.dhbw.karlsruhe.ase.domain.crafting;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author Dominik Ochs
  * @version 1.0
  */
-public class ResourceStash {
+public class ResourceStash implements Serializable {
 
     private final Deque<Resource> stash = new ArrayDeque<>();
     private int protectedResourcesCount = 0;

@@ -74,7 +74,17 @@ public enum CommandFactory {
     /**
      * The parameterless reset command that resets the game to the state after the last start command
      */
-    RESET("reset", matcher -> new ResetCommand());
+    RESET("reset", matcher -> new ResetCommand()),
+
+    /**
+     * Loads the game from {@link CommonOutput#PATH} and resumes right where it left off
+     */
+    LOAD("load", matcher -> new LoadGameCommand()),
+
+    /**
+     * Saves the game to {@link CommonOutput#PATH} and resumes the game
+     */
+    SAVE("save", matcher -> new SaveGameCommand());
 
     /**
      * factory returns a Command with the arguments provided by the Matcher that was used to match the regex
