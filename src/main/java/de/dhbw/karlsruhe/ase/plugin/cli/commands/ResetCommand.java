@@ -1,10 +1,11 @@
 package de.dhbw.karlsruhe.ase.plugin.cli.commands;
 
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
+import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
 import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 import de.dhbw.karlsruhe.ase.plugin.cli.Command;
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
-import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.application.Game;
 
 /**
  * reset the game to the state right after the last successful start call
@@ -12,7 +13,7 @@ import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
 public record ResetCommand() implements Command {
 
     @Override
-    public void execute(final IslandEscapeGame game) {
+    public void execute(final Game game) {
         try {
             game.reset();
         } catch (final GameStatusException e) {
@@ -20,6 +21,6 @@ public record ResetCommand() implements Command {
                     .print();
             return;
         }
-        Terminal.printLine(StandardOutput.OK);
+        Terminal.printLine(CommonOutput.OK);
     }
 }

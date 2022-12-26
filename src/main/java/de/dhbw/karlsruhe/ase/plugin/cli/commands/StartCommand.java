@@ -1,10 +1,11 @@
 package de.dhbw.karlsruhe.ase.plugin.cli.commands;
 
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
-import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.application.Game;
 import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
 import de.dhbw.karlsruhe.ase.plugin.cli.Command;
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
+import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
 import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 import de.dhbw.karlsruhe.ase.domain.cards.Card;
 import de.dhbw.karlsruhe.ase.domain.cards.CardDeck;
@@ -17,7 +18,7 @@ import java.util.List;
 public record StartCommand(List<Card> cards) implements Command {
 
     @Override
-    public void execute(final IslandEscapeGame game) {
+    public void execute(final Game game) {
         final CardDeck deck = new CardDeck();
         for (int i = cards.size() - 1; i >= 0; i--) {
             deck.lay(cards.get(i));
@@ -33,6 +34,6 @@ public record StartCommand(List<Card> cards) implements Command {
             new ErrorBuilder("game is running, can not use start now", "perhaps you want to reset").print();
             return;
         }
-        Terminal.printLine(StandardOutput.OK);
+        Terminal.printLine(CommonOutput.OK);
     }
 }

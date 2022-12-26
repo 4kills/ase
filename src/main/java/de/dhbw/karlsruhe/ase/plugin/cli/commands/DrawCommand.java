@@ -1,13 +1,13 @@
 package de.dhbw.karlsruhe.ase.plugin.cli.commands;
 
+import de.dhbw.karlsruhe.ase.domain.cards.Card;
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
+import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
 import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 import de.dhbw.karlsruhe.ase.plugin.cli.Command;
 import de.dhbw.karlsruhe.ase.application.GamePhaseException;
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
-import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
-import de.dhbw.karlsruhe.ase.application.results.ActionResult;
-import de.dhbw.karlsruhe.ase.application.results.DrawResult;
+import de.dhbw.karlsruhe.ase.application.Game;
 
 /**
  * draws the top most card from the deck
@@ -15,8 +15,8 @@ import de.dhbw.karlsruhe.ase.application.results.DrawResult;
 public record DrawCommand() implements Command {
 
     @Override
-    public void execute(final IslandEscapeGame game) {
-        final DrawResult draw;
+    public void execute(final Game game) {
+        final Card draw;
         try {
             draw = game.draw();
         } catch (final GamePhaseException e) {
@@ -24,15 +24,11 @@ public record DrawCommand() implements Command {
                     "try changing game phase first").print();
             return;
         } catch (final GameStatusException e) {
-            StandardOutput.printGameStatusError(e);
+            CommonOutput.printGameStatusError(e);
             return;
         }
 
-        String out = draw.draw().toString();
-        if (draw.result() == ActionResult.LOSE){
-            out += StandardOutput.NL_LOST;
-        }
-
+        String out = draw.toString();
         Terminal.printLine(out);
     }
 }

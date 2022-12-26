@@ -1,13 +1,11 @@
 package de.dhbw.karlsruhe.ase.plugin.cli;
 
-import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.plugin.cli.parsers.CommandParser;
-import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 import de.dhbw.karlsruhe.ase.plugin.cli.commands.QuitCommand;
-import de.dhbw.karlsruhe.ase.plugin.cli.Command;
-import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.application.Game;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * main-entry point of the program
@@ -24,8 +22,9 @@ public abstract class Main {
     public static void main(final String[] args) {
         final var quit = new QuitCommand();
         final var parser = new CommandParser();
+        final var gameEndReport = new GameEndReporter();
 
-        final IslandEscapeGame game = new IslandEscapeGame();
+        final Game game = new Game(List.of(gameEndReport));
 
         Command command = null;
         String raw;
@@ -42,6 +41,7 @@ public abstract class Main {
             if (command != null) {
                 command.execute(game);
             }
+            gameEndReport.report();
         } while (!quit.equals(command));
     }
 }

@@ -1,14 +1,13 @@
-package de.dhbw.karlsruhe.ase.plugin.cli.commands;
+package de.dhbw.karlsruhe.ase.plugin.cli;
 
-import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.application.GameStatus;
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
 
 // "static" class
-final class StandardOutput {
+public final class CommonOutput {
 
     // "static" class
-    private StandardOutput() {
+    private CommonOutput() {
 
     }
 

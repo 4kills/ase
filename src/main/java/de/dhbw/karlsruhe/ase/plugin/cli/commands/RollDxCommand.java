@@ -1,15 +1,15 @@
 package de.dhbw.karlsruhe.ase.plugin.cli.commands;
 
+import de.dhbw.karlsruhe.ase.application.RollHandler;
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
+import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
 import de.dhbw.karlsruhe.ase.plugin.cli.Terminal;
 import de.dhbw.karlsruhe.ase.plugin.cli.Command;
 import de.dhbw.karlsruhe.ase.application.GamePhaseException;
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
-import de.dhbw.karlsruhe.ase.application.IslandEscapeGame;
+import de.dhbw.karlsruhe.ase.application.Game;
 import de.dhbw.karlsruhe.ase.domain.dice.Roll;
 import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
-import de.dhbw.karlsruhe.ase.application.results.ActionResult;
-import de.dhbw.karlsruhe.ase.application.results.RollResult;
 
 /**
  * Provides the specified roll of the specified type of dice and relays it to the logic
@@ -17,23 +17,19 @@ import de.dhbw.karlsruhe.ase.application.results.RollResult;
  */
 public record RollDxCommand(Roll roll) implements Command {
     @Override
-    public void execute(final IslandEscapeGame game) {
-        final RollResult result;
+    public void execute(final Game game) {
+        final RollHandler.OutcomeType result;
         try {
             result = game.rollDx(roll);
         } catch (final GamePhaseException | InvalidDiceException e) {
             new ErrorBuilder("rollDx failed due to " + e.getMessage()).print();
             return;
         } catch (final GameStatusException e) {
-            StandardOutput.printGameStatusError(e);
+            CommonOutput.printGameStatusError(e);
             return;
         }
 
-        String out = result.rollOutput().toString().toLowerCase();
-        if (result.result() == ActionResult.LOSE){
-            out += StandardOutput.NL_LOST;
-        }
-
+        String out = result.toString().toLowerCase();
         Terminal.printLine(out);
     }
 }
