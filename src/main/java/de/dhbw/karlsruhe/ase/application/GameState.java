@@ -6,6 +6,7 @@ import de.dhbw.karlsruhe.ase.domain.crafting.ResourceStash;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -56,6 +57,19 @@ class GameState implements GameEndObservable {
         reinitializedState.setPhase(GamePhase.SCAVENGE);
         reinitializedState.setInvalidator(new CardInvalidator(deck, camp, stash));
         return reinitializedState;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameState gameState = (GameState) o;
+        return uuid.equals(gameState.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
     public UUID getUuid() {
