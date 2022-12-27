@@ -3,6 +3,7 @@ package de.dhbw.karlsruhe.ase.plugin.cli.commands;
 import de.dhbw.karlsruhe.ase.application.GameStatusException;
 import de.dhbw.karlsruhe.ase.application.Game;
 import de.dhbw.karlsruhe.ase.domain.IllegalActionException;
+import de.dhbw.karlsruhe.ase.domain.cards.RandomCardDeckGenerator;
 import de.dhbw.karlsruhe.ase.plugin.cli.Command;
 import de.dhbw.karlsruhe.ase.plugin.cli.ErrorBuilder;
 import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
@@ -19,9 +20,16 @@ public record StartCommand(List<Card> cards) implements Command {
 
     @Override
     public void execute(final Game game) {
-        final CardDeck deck = new CardDeck();
-        for (int i = cards.size() - 1; i >= 0; i--) {
-            deck.lay(cards.get(i));
+        final CardDeck deck;
+
+        if (cards.isEmpty()) {
+            deck = new RandomCardDeckGenerator().generate();
+        }
+        else {
+            deck = new CardDeck();
+            for (int i = cards.size() - 1; i >= 0; i--) {
+                deck.lay(cards.get(i));
+            }
         }
 
         try {

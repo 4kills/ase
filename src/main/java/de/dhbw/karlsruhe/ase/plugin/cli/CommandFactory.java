@@ -6,6 +6,7 @@ import de.dhbw.karlsruhe.ase.plugin.cli.parsers.CraftingPlanParser;
 import de.dhbw.karlsruhe.ase.plugin.cli.parsers.DiceParser;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,14 +22,14 @@ public enum CommandFactory {
     /**
      * The start command taking 64 cards separated by a comma as argument
      */
-    START("start ((?:wood,|metal,|plastic,|spider,|snake,|tiger,|thunderstorm,){63}"
-            + "(?:wood|metal|plastic|spider|snake|tiger|thunderstorm))",
+    START("start(?:\\?| ((?:wood,|metal,|plastic,|spider,|snake,|tiger,|thunderstorm,){63}"
+            + "(?:wood|metal|plastic|spider|snake|tiger|thunderstorm)))",
                 matcher ->
                         new StartCommand(
-                                Arrays.stream(matcher.group(1)
+                                matcher.group(1) == null ? List.of() : Arrays.stream(matcher.group(1)
                                                 .split(","))
-                                        .map(s -> new CardParser().parse(s))
-                                        .toList())
+                                                .map(s -> new CardParser().parse(s))
+                                                .toList())
     ),
 
     /**

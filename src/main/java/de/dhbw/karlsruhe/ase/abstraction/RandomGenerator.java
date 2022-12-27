@@ -1,5 +1,7 @@
 package de.dhbw.karlsruhe.ase.abstraction;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public final class RandomGenerator {
@@ -20,6 +22,10 @@ public final class RandomGenerator {
     public static void setSeed(long seed) {
         RandomGenerator.seed = seed;
         RandomGenerator.random = new Random(seed);
+    }
+
+    public static <T> void shuffle(List<T> list) {
+        Collections.shuffle(list, random);
     }
 
     public static int nextInt(NonNegativeInteger lowerInclusive, NonNegativeInteger upperExclusive) {
