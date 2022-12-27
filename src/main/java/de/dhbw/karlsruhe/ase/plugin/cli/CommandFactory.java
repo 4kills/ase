@@ -63,7 +63,7 @@ public enum CommandFactory {
      * The rollDx command that has two parameters: one specifying the type of dice (x) and one number
      * as argument that specifies the roll of the dice. The letter must fit semantically to the former
      */
-    ROLLDX("rollD(?:(\\+?0*4) (\\+?0*[1-4])|(\\+?0*6) (\\+?0*[1-6])|(\\+?0*8) (\\+?0*[1-8]))",
+    ROLLDX("rollD(?:(\\+?0*4) (\\+?0*[1-4])|(\\+?0*6) (\\+?0*[1-6])|(\\+?0*8) (\\+?0*[1-8])|(\\+?0*[468])\\?)",
         matcher -> new RollDxCommand(new DiceParser().parse(matcher))),
 
     /**

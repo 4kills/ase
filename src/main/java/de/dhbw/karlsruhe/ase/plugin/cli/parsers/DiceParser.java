@@ -18,7 +18,7 @@ public final class DiceParser implements Parser<Roll, Matcher> {
     @Override
     public Roll parse(final Matcher raw) {
         final String roll;
-        final DiceType diceType;
+        DiceType diceType;
 
         if (raw.group(1) != null) {
             diceType = DiceType.FOUR_SIDED;
@@ -26,9 +26,17 @@ public final class DiceParser implements Parser<Roll, Matcher> {
         } else if (raw.group(3) != null) {
             diceType = DiceType.SIX_SIDED;
             roll = raw.group(4);
-        } else {
+        } else if (raw.group(5) != null ) {
             diceType = DiceType.EIGHT_SIDED;
             roll = raw.group(6);
+        } else {
+            int diceNb = Integer.parseInt(raw.group(7));
+            DiceType type = null;
+            for (DiceType dice : DiceType.values()) {
+                if (diceNb == dice.integerRepresentation.value())
+                    type = dice;
+            }
+            return Roll.random(type);
         }
 
         return new Roll(diceType, new RollInteger(Integer.parseInt(roll)));

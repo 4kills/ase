@@ -1,6 +1,9 @@
 package de.dhbw.karlsruhe.ase.domain.dice;
 
 import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
+import de.dhbw.karlsruhe.ase.abstraction.RandomGenerator;
+
+import java.util.Random;
 
 /**
  * Immutable.
@@ -28,6 +31,11 @@ public record Roll(DiceType type, RollInteger roll) {
      */
     public Roll raiseRollBy(NonNegativeInteger amount) {
         return new Roll(type, RollInteger.fromNumberCapped(roll.value() + amount.value(), type));
+    }
+
+    public static Roll random(DiceType dice) {
+        int rand = RandomGenerator.nextInt(new NonNegativeInteger(dice.integerRepresentation.value())) + 1;
+        return new Roll(dice, new RollInteger(rand));
     }
 
     /**
