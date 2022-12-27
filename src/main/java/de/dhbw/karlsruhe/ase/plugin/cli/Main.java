@@ -30,7 +30,7 @@ public abstract class Main {
 
         Command command = null;
         String raw;
-        do {
+        while (!quit.equals(command)) {
             try {
                 raw = Terminal.readLine();
             } catch (final IOException e) {
@@ -39,11 +39,11 @@ public abstract class Main {
                 continue;
             }
 
-            command = parser.parse(raw);
+            command = parser.parse(raw.trim());
             if (command != null) {
                 command.execute(game);
             }
             gameEndReport.report();
-        } while (!quit.equals(command));
+        }
     }
 }

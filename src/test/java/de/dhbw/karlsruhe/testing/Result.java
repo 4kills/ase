@@ -71,7 +71,7 @@ public final class Result {
     public String toString() {
         StringBuilder str = new StringBuilder();
         for(String s : res) {
-            str.append(s).append("\n");
+            str.append(s).append(System.lineSeparator());
         }
         return str.toString();
     }

@@ -28,7 +28,8 @@ public final class CommandParser implements Parser<Command, String> {
             }
         }
 
-        new ErrorBuilder("unknown command entered", "perhaps you have a typo in the command").print();
+        new ErrorBuilder("unknown command entered", "perhaps you have a typo in the command."
+                + " Use 'help' for a list of commands").print();
         return null;
     }
 }

@@ -1,7 +1,9 @@
 package de.dhbw.karlsruhe.ase.blackbox_tests;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
+import de.dhbw.karlsruhe.ase.plugin.cli.CommandFactory;
 import de.dhbw.karlsruhe.ase.plugin.cli.Main;
 import de.dhbw.karlsruhe.testing.Result;
 import de.dhbw.karlsruhe.testing.Tester;
@@ -1265,6 +1267,18 @@ public class EdgeCaseTests {
 
         Assertions.assertEquals(expected, actual);
 
+    }
+
+    @Test
+    void helpDoesSomething() {
+        final Result actual = Tester.testAllCmds(mainMethod,
+                "help",
+                "quit");
+
+        var actualStr = actual.toString().replace(System.lineSeparator(), "");
+
+        Arrays.stream(CommandFactory.values()).map(CommandFactory::toString).map(c -> c.replace(System.lineSeparator(), ""))
+                .forEach(c -> Assertions.assertTrue(actualStr.contains(c)));
     }
 
     @Test
