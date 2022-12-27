@@ -4,8 +4,8 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * A tool is a buildable that allows to defend the player from threats like animals.
  * It gives a boost to the roll needed to defeat a animal encounter
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 interface Tool {
     /**

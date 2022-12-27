@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * A buildable is an object that can be crafted by the player in order to win the game.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public interface Buildable extends Serializable {
     /**

@@ -6,8 +6,8 @@ import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
  * A Shack models a Buildable used for protecting resources from being ravaged or devastated. A shack
  * can protect up to {@link Shack#NUMBER_OF_PROTECTED_ITEMS} resources
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 record Shack(CraftingPlan plan) implements Buildable, Building {
     private static final boolean DESTRUCTIBLE = false;

@@ -5,8 +5,8 @@ package de.dhbw.karlsruhe.ase.domain.dice;
  * Two dice (dice1, dice2) are compatible if and only if {@code dice1.getType().equals(dice2.getType())} returns
  * true, otherwise incompatible.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public final class InvalidDiceException extends Exception {
     private final Roll roll1;

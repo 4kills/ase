@@ -11,8 +11,8 @@ import java.util.UUID;
  * A workbench is the place in the camp to craft Buildables at. It provides methods to
  * craft Buildables with resources form the resource stash
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 record Workbench(ResourceStash stash) implements Serializable {
 

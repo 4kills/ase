@@ -6,8 +6,8 @@ import java.util.Collection;
 /**
  * This class provides methods to format collections as strings
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public final class CollectionStringer {
     /**

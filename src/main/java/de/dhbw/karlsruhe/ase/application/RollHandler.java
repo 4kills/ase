@@ -11,8 +11,8 @@ import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
 /**
  * Handles rolls of dice for endeavors and encounters as dictated by the game specification
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public class RollHandler {
     private final Camp camp;

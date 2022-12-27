@@ -9,8 +9,8 @@ import java.io.InputStreamReader;
  * This class provides some simple methods for input/output from and to a terminal as well as a method to read in
  * files.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public final class Terminal {
 

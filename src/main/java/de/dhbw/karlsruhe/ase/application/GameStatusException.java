@@ -3,8 +3,8 @@ package de.dhbw.karlsruhe.ase.application;
 /**
  * This exception is thrown if a command is called with a non-valid game status
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public class GameStatusException extends Exception {
     /**

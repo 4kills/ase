@@ -8,8 +8,8 @@ import java.util.Locale;
 /**
  * This enum represents the cards of the game
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum Card implements Refabricatable<Card> {
     /**

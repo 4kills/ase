@@ -9,8 +9,8 @@ import java.util.Random;
  * Immutable.
  * A roll represents a dice type as well as the rolled number
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public record Roll(DiceType type, RollInteger roll) {
     /**

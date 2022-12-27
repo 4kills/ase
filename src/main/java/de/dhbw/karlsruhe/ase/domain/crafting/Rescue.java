@@ -7,8 +7,8 @@ import de.dhbw.karlsruhe.ase.domain.dice.InvalidDiceException;
  * This interfaces makes a Buildable a Rescue, that is an object that can be used
  * to try and flee the island
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public interface Rescue {
     /**

@@ -3,8 +3,8 @@ package de.dhbw.karlsruhe.ase.application;
 /**
  * This exception is thrown if a command is called in a non-valid game phase
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public class GamePhaseException extends Exception {
     private final GamePhase gamePhase;

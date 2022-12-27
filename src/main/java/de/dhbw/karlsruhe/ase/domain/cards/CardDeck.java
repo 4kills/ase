@@ -12,8 +12,8 @@ import java.util.Map;
  * {@link RefabDeck} deck and provides additional
  * methods for working with the card deck as the deck for the game.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public class CardDeck implements Deck<Card> {
 

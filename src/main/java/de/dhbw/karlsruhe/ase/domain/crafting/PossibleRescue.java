@@ -9,8 +9,8 @@ import de.dhbw.karlsruhe.ase.domain.dice.RollInteger;
  * Creates a new Possible Rescue that might succeed when attempting an {@link #endeavor(Roll)}.
  * Whether it succeeds depends on the required roll for this possible rescue
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 record PossibleRescue(CraftingPlan plan) implements Buildable, Rescue {
     private static final Roll REQUIRED_ROLL = new Roll(DiceType.SIX_SIDED, new RollInteger(4));

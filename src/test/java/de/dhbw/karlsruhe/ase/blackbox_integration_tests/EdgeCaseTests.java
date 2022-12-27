@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase.blackbox_tests;
+package de.dhbw.karlsruhe.ase.blackbox_integration_tests;
 
 import java.util.Arrays;
 import java.util.function.Consumer;

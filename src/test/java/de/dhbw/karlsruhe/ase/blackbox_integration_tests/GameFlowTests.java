@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase.blackbox_tests;
+package de.dhbw.karlsruhe.ase.blackbox_integration_tests;
 
 import de.dhbw.karlsruhe.ase.plugin.cli.Main;
 import de.dhbw.karlsruhe.testing.Result;
@@ -8,11 +8,46 @@ import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 
-public class ExampleScenario {
+public class GameFlowTests {
     private static Consumer<String[]> mainMethod = Main::main;
 
     static {
         Tester.setTimeout(0);
+    }
+
+    @Test
+    void test() {
+        final Result actual = Tester.testAllCmds(mainMethod,
+                "start wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood,wood," +
+                        "metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal,metal," +
+                        "plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic,plastic," +
+                        "spider,spider,spider,spider,spider,snake,snake,snake,snake,snake,tiger,tiger,tiger,tiger,tiger,thunderstorm",
+                "draw",
+                "draw",
+                "draw",
+                "list-resources",
+                "build axe",
+                "build?",
+                "list-buildings",
+                "build club",
+                "quit"
+        );
+
+        final Result expected = new Result(
+                "OK",
+                "wood",
+                "wood",
+                "wood",
+                "wood",
+                "wood",
+                "wood",
+                Result.ERR,
+                "club",
+                "EMPTY",
+                "OK"
+        );
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

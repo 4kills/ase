@@ -14,8 +14,8 @@ import java.util.Set;
  * This class models all the player's collected resources. It can be devastated or ravaged
  * by catastrophes or animals respectively. Its contents can be used for crafting.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 class ResourceStash implements Serializable {
 

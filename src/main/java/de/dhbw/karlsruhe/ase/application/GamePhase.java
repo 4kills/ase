@@ -3,8 +3,8 @@ package de.dhbw.karlsruhe.ase.application;
 /**
  * The game phase the game is currently in.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 enum GamePhase {
     /**

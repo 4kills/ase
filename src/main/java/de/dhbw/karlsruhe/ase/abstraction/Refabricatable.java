@@ -10,8 +10,8 @@ package de.dhbw.karlsruhe.ase.abstraction;
  * has been overridden to be accessible).
  *
  * @param <T> The type of refabricatable
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public interface Refabricatable<T> {
     /**

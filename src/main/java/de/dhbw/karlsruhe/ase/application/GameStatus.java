@@ -3,8 +3,8 @@ package de.dhbw.karlsruhe.ase.application;
 /**
  * The game status of a game. Not to be confused with {@link GamePhase}
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum GameStatus {
     /**

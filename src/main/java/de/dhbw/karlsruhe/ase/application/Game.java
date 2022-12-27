@@ -19,8 +19,8 @@ import java.util.List;
  * The controller class that is the only game-logic-implementing class that communicates with the Userinterface
  * ant takes its instructions. Here the 'pieces' are put together
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public final class Game {
 

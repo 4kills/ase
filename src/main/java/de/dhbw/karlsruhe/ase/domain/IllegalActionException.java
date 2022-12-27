@@ -10,7 +10,7 @@ package de.dhbw.karlsruhe.ase.domain;
  * This exception occurs when user input is syntactically correct (meaning it passed the regex test
  * and no parse exception was thrown) but the action would result in inconsistencies in the domain.
  *
- * @author Dominik Ochs
+ * 
  * @version 2.0
  */
 public final class IllegalActionException extends Exception {

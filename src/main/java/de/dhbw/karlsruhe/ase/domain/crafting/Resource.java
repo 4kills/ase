@@ -5,8 +5,8 @@ import java.util.Locale;
 /**
  * A resource needed to build Buildables that is provided by Cards
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum Resource {
     /**

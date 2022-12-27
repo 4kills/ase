@@ -3,8 +3,8 @@ package de.dhbw.karlsruhe.ase.domain.cards;
 /**
  * This enum specifies the categories of cards that exist
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum CardCategory {
     /**

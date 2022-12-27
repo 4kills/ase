@@ -15,8 +15,8 @@ import java.util.regex.Pattern;
  * The Command Factory enum specifies the commands of the program and their syntax
  * with regular expressions and their creation methods
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum CommandFactory {
     /**

@@ -8,9 +8,6 @@ import java.util.*;
 /**
  * A camp represents the base of the player's operations. It contains all the buildings as well as a stash of
  * the player's collected resources. It provides methods for building Buildables via the {@link Workbench}.
- *
- * @author Dominik Ochs
- * @version 1.0
  */
 public class Camp implements Serializable {
 

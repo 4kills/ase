@@ -12,8 +12,8 @@ import de.dhbw.karlsruhe.ase.domain.dice.RollInteger;
  * An animal encounter represents the animal drawn by an animal-type cards and it's strength.
  * Also provides a method to fight the animal.
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum AnimalEncounter {
     /**

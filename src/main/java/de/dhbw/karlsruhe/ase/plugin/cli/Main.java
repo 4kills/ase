@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * main-entry point of the program
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public abstract class Main {
 

@@ -11,8 +11,8 @@ import java.util.Set;
  * An immutable crafting plan that specifies the crafting recipes for the different Buildables.
  * It specifies the required Resources as well as the quantity for each Buildable
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum CraftingPlan {
     /**

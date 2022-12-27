@@ -6,8 +6,8 @@ import de.dhbw.karlsruhe.ase.abstraction.Refabricatable;
 /**
  * This immutable class is used to describe the resource requirements of a Buildable
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 record ResourceRequirement(Resource resource, NonNegativeInteger amount) implements Refabricatable<ResourceRequirement> {
     /**

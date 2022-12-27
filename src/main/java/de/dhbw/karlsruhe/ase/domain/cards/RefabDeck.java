@@ -15,8 +15,8 @@ import java.util.Iterator;
  * Refabricatebles via the {@link #reset()} method
  *
  * @param <T> The type of the Deck that needs to implement the Refabricatable interface
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 class RefabDeck<T extends Refabricatable<T>> implements Deck<T> {
     private final Deque<T> initial = new ArrayDeque<>();

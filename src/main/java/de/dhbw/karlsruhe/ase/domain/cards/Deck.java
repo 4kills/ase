@@ -8,8 +8,8 @@ import java.io.Serializable;
  * that it saves the <b>initial</b> state of the data structure as specified by {@link #lay(Object)}
  *
  * @param <T> The type of the Deck
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 interface Deck<T> extends Iterable<T>, Serializable {
     /**

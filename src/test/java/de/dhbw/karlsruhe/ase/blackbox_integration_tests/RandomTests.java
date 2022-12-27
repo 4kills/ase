@@ -1,6 +1,5 @@
-package de.dhbw.karlsruhe.ase.blackbox_tests;
+package de.dhbw.karlsruhe.ase.blackbox_integration_tests;
 
-import de.dhbw.karlsruhe.ase.abstraction.NonNegativeInteger;
 import de.dhbw.karlsruhe.ase.abstraction.RandomGenerator;
 import de.dhbw.karlsruhe.ase.plugin.cli.Main;
 import de.dhbw.karlsruhe.testing.Result;
@@ -9,8 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class RandomTests {
@@ -54,7 +51,7 @@ public class RandomTests {
     }
 
     /**
-     * This is almost the same scenario as in {@link ExampleScenario} but with random rolls (and the adjusted results)
+     * This is almost the same scenario as in {@link GameFlowTests} but with random rolls (and the adjusted results)
      */
     @Test
     public void testRandomRoll() {

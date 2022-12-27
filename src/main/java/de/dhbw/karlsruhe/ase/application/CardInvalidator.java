@@ -9,8 +9,8 @@ import java.io.Serializable;
 /**
  * This class invalidates the drawn cars, meaning it handles the cards' effects
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 class CardInvalidator implements Serializable {
     private final CardDeck deck;

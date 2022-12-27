@@ -1,4 +1,4 @@
-package de.dhbw.karlsruhe.ase.blackbox_tests;
+package de.dhbw.karlsruhe.ase.blackbox_integration_tests;
 
 import de.dhbw.karlsruhe.ase.plugin.cli.CommonOutput;
 import de.dhbw.karlsruhe.ase.plugin.cli.Main;

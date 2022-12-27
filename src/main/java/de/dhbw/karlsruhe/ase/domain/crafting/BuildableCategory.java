@@ -4,8 +4,8 @@ package de.dhbw.karlsruhe.ase.domain.crafting;
  * This enum specifies all the possible Building categories a player can construct in order to
  * do different things on the island
  *
- * @author Dominik Ochs
- * @version 1.0
+ * 
+ * 
  */
 public enum BuildableCategory {
     /**
