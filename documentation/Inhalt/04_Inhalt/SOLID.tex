@@ -44,19 +44,6 @@ $512 \cdot 0,2m = 102,4m$. Die Zweierpotenz bzw. eher das Vielfache von 32 wird 
 sodass das Bild nicht zu klein in der U-Net-Struktur wird, bzw. damit eine saubere Teilung der 
 Max-Pool-Schichten möglich ist, die die Bildkantenlänge stets halbieren. 
 
-\begin{wrapfigure}{r}{0.40\textwidth}
-	\centering
-	\vspace{-30pt} % Manchmal möchte man den oberen Abstand selbst anpassen
-	\includegraphics[width=0.35\textwidth]{Bilder/cut-example.jpg}
-	\vspace{-10pt}
-	% Das folgende ist ein Trick, um "Abbilgung x.y" in eine
-	% eigene Zeile zu packen. Der Text zwischen [ und ] steht
-	% im Abbildungsverzeichnis. Der Text darunter wird
-	% tatsächlich angezeigt.
-	\caption[Beispiel $512\times 512$-Ausschnitt aus Bike-Datensatz.]{\unskip}
-	Beispiel $512\times 512$-Ausschnitt aus Bike-Datensatz mit roter Maske.
-	\label{fig:cut-example}
-\end{wrapfigure}
 
 Jedes $10.000\times 10.000$-Pixel-Bild und die dazugehörige Maske wird in 
 $\left\lceil{\frac{10.000}{512}}\right\rceil^2 = 400$ Teile geschnitten. 
@@ -173,22 +160,7 @@ sollte das Modell für Orhtofotos mit unterschiedlicher \ac{GSD} generalisiert w
 Am Ende jeder Epoche wird der Trainingsdatensatz gemischt, sodass in der nächsten Epoche neue zufällige 
 Batches entstehen. 
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.45\textwidth}
-		\centering
-		\includegraphics[width=.7\linewidth]{Bilder/cut-example.jpg} 
-	\end{minipage}
-	\begin{minipage}{.45\textwidth}
-		\centering
-		\includegraphics[width=.7\linewidth]{Bilder/augmentation-example.png} 
-	\end{minipage}
 
-	\caption{Beispielhafte Datenaugmentation mit Originalbild und Maske in Rot links 
-	und augmentiertes (horizontale Spiegelung, Rotation, Verschiebung nach links) Bild 
-	mit Maske in Rot rechts.  }
-	\label{fig:augmentation}
-\end{figure} 
 
 % augmentation = {
 % 	"rotation_range": 90,
@@ -302,12 +274,6 @@ Diese Anpassungen sind in der nachfolgenden Liste erklärt.
 	Im Falle einer One-Hot-Kodierung würde hier Softmax herangezogen werden. 
 \end{itemize}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=1.\textwidth]{Bilder/own-unet-2mil.pdf} 
-	\caption{Bike-U-Net-2 mit 1,946 Mio. Parametern.}
-	\label{fig:bike-unet-2}
-\end{figure} 
 
 % HE INITIALIZATION
 
