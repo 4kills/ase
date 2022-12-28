@@ -1,0 +1,202 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": true,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": false
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.application.RollHandler",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+Camp1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Camp</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   constructed: Deque&lt;Buildable&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentEndeavor: Rescue [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   hasFireplace: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stash: ResourceStash [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   strongestWeapon: Tool [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   uuid: UUID [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   workbench: Workbench [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Camp(uuid: UUID)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addResource(r: Resource)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ build(plan: CraftingPlan): Buildable</TD></TR>
+<TR><TD ALIGN="LEFT" >+ canBuildAnything(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ devastate()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listConstructed(): List&lt;Buildable&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listPossibleCraftingPlans(): List&lt;CraftingPlan&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ ravage()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ resources(): List&lt;Resource&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Card1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)Card</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   METAL: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   PLASTIC: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SNAKE: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SPIDER: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   THUNDERSTORM: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   TIGER: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   WOOD: Card [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   category: CardCategory [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   resource: Resource [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- Card(category: CardCategory, resource: Resource)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ refabricate(): Card</TD></TR>
+<TR><TD ALIGN="LEFT" >+ valueOf(name: String): Card</TD></TR>
+<TR><TD ALIGN="LEFT" >+ values(): Card[]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+OutcomeType1123845887[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)OutcomeType</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   LOSE: OutcomeType [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SURVIVED: OutcomeType [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   WIN: OutcomeType [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ valueOf(name: String): OutcomeType</TD></TR>
+<TR><TD ALIGN="LEFT" >+ values(): OutcomeType[]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+EndeavorHandler1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EndeavorHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camp: Camp [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   outcome: OutcomeType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ EndeavorHandler(camp: Camp)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ endeavor(roll: Roll): GamePhase</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EncounterHandler1052887606[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EncounterHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camp: Camp [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastCard: Card [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   outcome: OutcomeType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ EncounterHandler(camp: Camp, lastCard: Card)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ encounter(roll: Roll)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+EncounterHandler1052887606 -> Camp1135820194[label="camp
+[0..1]"];
+EncounterHandler1052887606 -> Card1697264569[label="lastCard
+[0..1]"];
+EncounterHandler1052887606 -> OutcomeType1123845887[label="outcome
+[0..1]"];
+EndeavorHandler1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+EndeavorHandler1052887806 -> OutcomeType1123845887[label="outcome
+[0..1]"];
+    
+}
+@enduml
