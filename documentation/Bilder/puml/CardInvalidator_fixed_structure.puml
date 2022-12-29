@@ -1,0 +1,231 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 2,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.application.CardInvalidator",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+
+
+Camp1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Camp</TD></TR>
+
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Card1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)Card</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+  invalidate(camp: Camp)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+
+MetalCard1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MetalCard</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-  resource: Resource [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+  invalidate(camp: Camp)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#ffffff"
+];
+
+WoodCard1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)WoodCard</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-  resource: Resource [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+  invalidate(camp: Camp)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#ffffff"
+];
+
+TigerCard1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TigerCard</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+  invalidate(camp: Camp)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#ffffff"
+];
+
+CardDeck1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardDeck</TD></TR>
+
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+
+CardInvalidator1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardInvalidator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camp: Camp [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   deck: CardDeck [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   depleted: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastDraw: Card [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ draw(): GamePhase</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+
+GameState1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameState</TD></TR>
+
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Resource1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)Resource</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   METAL: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   NO_RESOURCE: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   PLASTIC: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   WOOD: Resource [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+
+'edges
+MetalCard1697264569 -> Resource1135820194 [label="resource
+[1]"];
+WoodCard1697264569 -> Resource1135820194 [label="resource
+[1]"];
+
+CardDeck1697264569 -> Card1697264569[label="deck
+[0..*]"];
+CardInvalidator1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+CardInvalidator1052887806 -> Card1697264569[label="draw() -> invalidate()
+[0..1]"];
+CardInvalidator1052887806 -> CardDeck1697264569[label="deck
+[0..1]"];
+GameState1052887806 -> CardInvalidator1052887806[label="invalidator
+[0..1]"];
+
+Card1697264569 -> MetalCard1697264569[arrowhead=none, arrowtail=empty, dir=both];
+Card1697264569 -> WoodCard1697264569[arrowhead=none, arrowtail=empty, dir=both];
+Card1697264569 -> TigerCard1697264569[arrowhead=none, arrowtail=empty, dir=both];
+
+}
+@enduml

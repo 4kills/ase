@@ -19,7 +19,7 @@
 \end{wrapfigure}
 
 \autoref{fig:srp-DiceParser} zeigt das UML-Klassendiagramm des \textit{DiceParser}, welcher in der Plugin-Schicht
-unter \texttt{plugin.cli.parsers} zu finden ist und das Positivbeispiel darstellt. 
+unter \texttt{plugin.cli.parsers} zu finden ist und das Positiv-Beispiel darstellt. 
 Dieser implementiert das \textit{Parser}-Interface aus 
 \texttt{plugin.cli}. Die einzige Aufgabe des DiceParsers ist es die Usereingabe zum Erstellen eines Würfelwurfs
 aus Text zu parsen und das entsprechende Objekt zu kreieren. Hierzu wird der \textit{Regex}-Matcher, der 
@@ -83,6 +83,86 @@ sondern nur noch \underline{Additions} durchgeführt werden (offen für Erweiter
 
 \subsubsection{Negativ-Beispiel:}
 
+\autoref{fig:ocp-CardInvalidator} zeigt das Negativ-Beispiel für das OCP. Die hier relevanten Klassen sind 
+der \textit{CardInvalidator} und das \textit{Card}-Enum, welches eine \textit{CardCategory} und eine \textit{Resource} enthält. 
+Der CardInvalidator zieht bisher eine Karte vom \textit{CardDeck} mit der \textit{draw}-Methode und invalidiert die Karte,
+indem er deren Effekt einlöst. Dies wird mithilfe eines \texttt{switch}-Statements über die CardCategory der Karte entschieden.
+Wenn nun also eine neue Karte mit einem neuen Karteneffekt hinzugefügt werden soll, muss also die \textit{draw}-Methode 
+\underline{verändert} werden. Das OCP ist also nicht gewahrt. \\
+\autoref{fig:ocp-CardInvalidator-fixed} zeigt eine mögliche Lösung, um das OCP einzuhalten: 
+Das Card-Enum wurde mit einem Card-Interface mit der \textit{invalidate}-Methode ersetzt 
+und die Karten (Metal, Wood, Tiger, etc.) sind nun Implementationen des Card-Interface und \textit{CardCategory} wurde entfernt.
+Somit kann der CardInvalidator in 
+\textit{draw} einfach die invalidate-Methode der gezogenen Karte aufrufen und die Karte führt selbst ihren Effekt aus. 
+Somit können in Zukunft beliebig neue Karten eingeführt werden, für die einfach nur eine Implementation des Card-Interface 
+geschrieben werden muss. Es ist keine Veränderung bestehenden Codes mehr nötig und somit wird das OCP mit dieser Lösung eingehalten.
 
-\section{Analyse }
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Bilder/CardInvalidator_structure.pdf} 
+	\caption{UML-Klassendiagramm von \textit{CardInvalidator} und \textit{Card}.}
+	\label{fig:ocp-CardInvalidator}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.55\textwidth]{Bilder/CardInvalidator_fixed_structure.pdf} 
+	\caption{\autoref{fig:ocp-CardInvalidator} mit Card-Interface und Implementationen statt Card-Enum und CardCategory. 
+	Aus Übersichtlichkeit wurden nicht alle Implementationen eingezeichnet.}
+	\label{fig:ocp-CardInvalidator-fixed}
+\end{figure} 
+
+
+\section{Analyse Interface-Segreggation-Principle (ISP)}
+
+\subsubsection{Positiv-Beispiel:} 
+
+\autoref{fig:isp-Buildable} zeigt wie die Interfaces \textit{Buildable}, \textit{Tool}, \textit{Building} und \textit{Rescue} 
+das ISP einhalten. Die Abhängigkeiten von anderen Klassen auf Tool, Building und Rescue sind aus Übersichtlichkeitsgründen ausgelassen.
+Alle Interfaces enthalten nur eine Methode und alle Tool-, Building- und Rescue-Implementationen sind auch Buildables 
+aber nicht anders herum. So können die Interfaces sehr flexibel angewandt werden und das ISP ist gewahrt. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Bilder/Buildable_structure.pdf} 
+	\caption{UML-Diagramm von Buildable, Endeavor, Tool und Building und deren Implementationen.}
+	\label{fig:isp-Buildable}
+\end{figure} 
+
+\subsubsection{Negativ-Beispiel:}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Bilder/Deck_structure.pdf} 
+	\caption{UML-Diagramm von \textit{Deck} und dessen Implementationen.}
+	\label{fig:isp-Deck}
+\end{figure} 
+
+
+\autoref{fig:isp-Deck} zeigt das \textit{Deck}-Interface - das einzige Interface in der Applikation mit mehr als einer Methode.
+Zunächst ist es allerdings diskutabel, ob es sich hierbei wirklich um ein Negativ-Beispiel handelt, da es sich bei dem Deck-Interface 
+um eine Datenstruktur handelt, die besondere Eigenschaften aufweisen soll, wie z.B. dass der ursprüngliche Zustand der Datenstruktur 
+bei Aufruf der \textit{reset}-Methode wieder hergestellt werden soll. Alle Methoden des Deck-Interfaces werden also 
+gesammelt und gemeinsam benötigt, damit eine Klasse von der Abstraktion des Deck-Interfaces abhängen kann und den nötigen 
+Funktionsumfang verwenden kann. Hier kann also erstmal das Deck-Interface nicht aufgeteilt werden. 
+Außerdem hängt das Deck-Interface von dem \textit{Iterator}-Interface ab, sodass alle Implementationen von Deck auch 
+automatisch Iterator implementieren müssen. Diese Funktion ist aber ebenfalls für ein Deck gewünscht - es soll möglich sein, 
+mit einer Schleife über die Elemente des Deck zu iterieren. Damit ist also auch nicht das Iterator-Interface abspaltbar. \\
+Allerdings wird es unmittelbar klar, dass das ISP hier eindeutig und ohne Diskussion gebrochen wird, wenn betrachtet wird, 
+dass Deck ebenfalls das \textit{Serializable}-Interface beinhaltet, wodurch automatisch alle Implementationen das 
+Serializable-Interface implementieren, was natürlich absolut \textit{keinen} Sinn ergibt. Es ist sogar gefährlich: 
+Beim Implementieren des Deck-Interface wird dem Programmierer nicht klar, dass er die Implementation implizit und ohne Kenntnis als 
+Serializable markiert, was ein großes Problem darstellen kann. \\ 
+\autoref{fig:isp-Deck-fixed} zeigt nun, dass dieses Problem einfach behoben werden kann, indem die Implementationen explizit und direkt
+Serializable implementieren und so bewusst die jeweilige Implementation als Serializable markieren. Damit ist das ISP wieder gewahrt,
+da das Deck so weit wie sinnvoll möglich (Erläuterung s.o.) verkleinert wurde und die Implementationen nun von mehreren kleineren Interfaces abhängen,
+anstelle von einem größeren abhängen. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Bilder/Deck_fixed_structure.pdf} 
+	\caption{\autoref{fig:isp-Deck} mit abgespaltetem \textit{Serializable}-Interface.}
+	\label{fig:isp-Deck-fixed}
+\end{figure} 
 
