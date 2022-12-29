@@ -1,0 +1,391 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 4,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "BothDirections" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.crafting.Camp",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes
+
+subgraph cluster_3082201 {
+   	label=application
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+
+    CardInvalidator1052887806[
+        label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)CardInvalidator</TD></TR>
+    </TABLE>>
+        style=filled
+        margin=0
+        shape=plaintext
+        fillcolor="#FFFFFF"
+    ];
+
+    Game1052887806[
+        label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Game</TD></TR>
+    </TABLE>>
+        style=filled
+        margin=0
+        shape=plaintext
+        fillcolor="#FFFFFF"
+    ];
+
+    GameState1052887806[
+        label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)GameState</TD></TR>
+    </TABLE>>
+        style=filled
+        margin=0
+        shape=plaintext
+        fillcolor="#FFFFFF"
+    ];
+
+    RollHandler1052887806[
+        label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)RollHandler</TD></TR>
+    </TABLE>>
+        style=filled
+        margin=0
+        shape=plaintext
+        fillcolor="#FFFFFF"
+    ];
+
+}
+
+subgraph cluster_3082202 {
+   	label=domain
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+
+	subgraph cluster_811044466 {
+       	label=crafting
+    	labeljust=l
+    	fillcolor="#d8d8d8"
+    	style=filled
+
+	Axe1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Axe</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    Buildable1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(I)Buildable</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#F1E5FD"
+    ];
+
+    Building1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(I)Building</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#F1E5FD"
+    ];
+
+    Camp1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Camp</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >-   constructed: Deque&lt;Buildable&gt; [0..*]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   currentEndeavor: Rescue [0..1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   hasFireplace: boolean [1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   stash: ResourceStash [0..1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   strongestWeapon: Tool [0..1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   uuid: UUID [0..1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   workbench: Workbench [0..1]</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >+ addResource(r: Resource)</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ build(plan: CraftingPlan): Buildable</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ canBuildAnything(): boolean</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ devastate()</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ listConstructed(): List&lt;Buildable&gt;</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ listPossibleCraftingPlans(): List&lt;CraftingPlan&gt;</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ ravage()</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ resources(): List&lt;Resource&gt;</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    Club1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Club</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    CraftingPlan1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(E)CraftingPlan</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#DCFBD5"
+    ];
+
+    Fireplace1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Fireplace</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    GuaranteedRescue1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)GuaranteedRescue</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+
+    PossibleRescue1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)PossibleRescue</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    Rescue1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(I)Rescue</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#F1E5FD"
+    ];
+
+
+    Resource1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(E)Resource</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#DCFBD5"
+    ];
+
+
+    ResourceStash1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)ResourceStash</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >-   protectedResourcesCount: NonNegativeInteger [0..1]</TD></TR>
+    <TR><TD ALIGN="LEFT" >-   stash: Deque&lt;Resource&gt; [0..*]</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >+ add(resource: Resource)</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ consumeResources(required: Set&lt;ResourceRequirement&gt;)</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ devastate()</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ hasResources(required: Set&lt;ResourceRequirement&gt;): boolean</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ protectTopMostNResources(n: NonNegativeInteger)</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+    Shack1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Shack</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+
+
+    Tool1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(I)Tool</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#F1E5FD"
+    ];
+
+    Workbench1135820194[
+    	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+    <TR><TD ALIGN="LEFT" >(C)Workbench</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >-   stash: ResourceStash [0..1]</TD></TR>
+    <HR/>
+    <TR><TD ALIGN="LEFT" >+ build(plan: CraftingPlan, hasFireplace: boolean): Buildable</TD></TR>
+    <TR><TD ALIGN="LEFT" >- build(plan: CraftingPlan): Buildable</TD></TR>
+    <TR><TD ALIGN="LEFT" >- canBuild(plan: CraftingPlan, hasFireplace: boolean): boolean</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ getCraftablePlans(hasFireplace: boolean): Set&lt;CraftingPlan&gt;</TD></TR>
+    <TR><TD ALIGN="LEFT" >+ stash(): ResourceStash</TD></TR>
+    </TABLE>>
+    	style=filled
+    	margin=0
+    	shape=plaintext
+    	fillcolor="#FFFFFF"
+    ];
+}
+}
+
+
+
+'edges    
+Axe1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+Buildable1135820194 -> Axe1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Buildable1135820194 -> Club1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Buildable1135820194 -> Fireplace1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Buildable1135820194 -> GuaranteedRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Buildable1135820194 -> PossibleRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Buildable1135820194 -> Shack1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Building1135820194 -> Fireplace1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Building1135820194 -> Shack1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Camp1135820194 -> Buildable1135820194[label="constructed
+[0..*]"];
+Camp1135820194 -> Building1135820194[label="devastate() -> isDestructible()"];
+Camp1135820194 -> Rescue1135820194[label="currentEndeavor
+[0..1]"];
+Camp1135820194 -> ResourceStash1135820194[label="stash
+[0..1]"];
+Camp1135820194 -> Tool1135820194[label="strongestWeapon
+[0..1]"];
+Camp1135820194 -> Workbench1135820194[label="workbench
+[0..1]"];
+CardInvalidator1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+Club1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+Fireplace1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+Game1052887806 -> CardInvalidator1052887806[label="draw() -> draw()"];
+Game1052887806 -> RollHandler1052887806[label="rollDx() -> handle()"];
+GameState1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+GameState1052887806 -> CardInvalidator1052887806[label="invalidator
+[0..1]"];
+GuaranteedRescue1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+PossibleRescue1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+Rescue1135820194 -> GuaranteedRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Rescue1135820194 -> PossibleRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+ResourceStash1135820194 -> Resource1135820194[label="stash
+[0..*]"];
+RollHandler1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+Shack1135820194 -> CraftingPlan1135820194[label="plan
+[0..1]"];
+Tool1135820194 -> Axe1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Tool1135820194 -> Club1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Workbench1135820194 -> ResourceStash1135820194[label="stash
+[0..1]"];
+    
+}
+@enduml

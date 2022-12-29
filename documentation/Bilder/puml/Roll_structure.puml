@@ -1,0 +1,195 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.dice.Roll",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+AnimalEncounter593698258[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)AnimalEncounter</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   SNAKE: AnimalEncounter [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SPIDER: AnimalEncounter [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   TIGER: AnimalEncounter [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   requiredRoll: Roll [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ fight(roll: Roll): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ fromCard(animalCard: Card): AnimalEncounter</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+DiceType1746401859[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)DiceType</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   EIGHT_SIDED: DiceType [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   FOUR_SIDED: DiceType [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SIX_SIDED: DiceType [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   integerRepresentation: RollInteger [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+InvalidDiceException1746401859[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InvalidDiceException</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   roll1: Roll [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   roll2: Roll [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Roll1746401859[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Roll</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   roll: RollInteger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   type: DiceType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ raiseRollBy(amount: NonNegativeInteger): Roll</TD></TR>
+<TR><TD ALIGN="LEFT" >+ random(dice: DiceType): Roll</TD></TR>
+<TR><TD ALIGN="LEFT" >+ roll(): RollInteger</TD></TR>
+<TR><TD ALIGN="LEFT" >+ type(): DiceType</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RollDxCommand1702927325[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RollDxCommand</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   roll: Roll [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(game: Game)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ roll(): Roll</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RollInteger1746401859[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RollInteger</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   value: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ fromNumberCapped(value: int, dice: DiceType): RollInteger</TD></TR>
+<TR><TD ALIGN="LEFT" >+ value(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+AnimalEncounter593698258 -> Roll1746401859[label="requiredRoll
+[0..1]"];
+InvalidDiceException1746401859 -> Roll1746401859[label="roll1
+[0..1]"];
+InvalidDiceException1746401859 -> Roll1746401859[label="roll2
+[0..1]"];
+Roll1746401859 -> DiceType1746401859[label="type
+[0..1]"];
+Roll1746401859 -> RollInteger1746401859[label="roll
+[0..1]"];
+RollDxCommand1702927325 -> Roll1746401859[label="roll
+[0..1]"];
+    
+}
+@enduml

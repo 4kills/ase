@@ -1,0 +1,244 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.application.GameState",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+Camp1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Camp</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CardDeck1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardDeck</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CardInvalidator1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardInvalidator</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Game1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Game</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   loader: PersistenceReader [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   saver: PersistenceWriter [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   state: GameState [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GameEndObservable1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)GameEndObservable</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ notifyObservers(newState: GameResult)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ register(observer: GameEndObserver)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+GameEndObserver1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)GameEndObserver</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ update(newState: GameResult)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+GamePhase1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)GamePhase</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   ENCOUNTER: GamePhase [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   END: GamePhase [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   ENDEAVOR: GamePhase [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SCAVENGE: GamePhase [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+GameResult1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)GameResult</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   LOSE: GameResult [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   NONE: GameResult [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   WIN: GameResult [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+GameState1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameState</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camp: Camp [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   deck: CardDeck [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   invalidator: CardInvalidator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   observers: List&lt;GameEndObserver&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   phase: GamePhase [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   result: GameResult [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   status: GameStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   uuid: UUID [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ reinitialize(): GameState</TD></TR>
+
+<TR><TD ALIGN="LEFT" >+ notifyObservers(newState: GameResult)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ register(observer: GameEndObserver)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ @Override hashCode(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ @Override equals(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GameStatus1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)GameStatus</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   ENDED: GameStatus [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   RUNNING: GameStatus [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   UNINITIALIZED: GameStatus [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+'edges    
+Game1052887806 -> GameState1052887806[label="state
+[0..1]"];
+GameEndObservable1052887806 -> GameState1052887806[arrowhead=none, arrowtail=empty, dir=both];
+GameState1052887806 -> Camp1135820194[label="camp
+[0..1]"];
+GameState1052887806 -> CardDeck1697264569[label="deck
+[0..1]"];
+GameState1052887806 -> CardInvalidator1052887806[label="invalidator
+[0..1]"];
+GameState1052887806 -> GameEndObserver1052887806[label="observers
+[0..*]"];
+GameState1052887806 -> GamePhase1052887806[label="phase
+[0..1]"];
+GameState1052887806 -> GameResult1052887806[label="result
+[0..1]"];
+GameState1052887806 -> GameStatus1052887806[label="status
+[0..1]"];
+    
+}
+@enduml
