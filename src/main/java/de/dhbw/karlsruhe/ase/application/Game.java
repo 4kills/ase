@@ -66,7 +66,7 @@ public final class Game {
 
         final Buildable crafted = state.getCamp().build(plan);
 
-        if (crafted.getCategory() != BuildableCategory.RESCUE) {
+        if (crafted.plan().getCategory() != BuildableCategory.RESCUE) {
             checkLose();
             return GameResult.LOSE;
         }

@@ -16,13 +16,4 @@ public interface Buildable extends Serializable {
      * @return the crafting plan of the buildable
      */
     CraftingPlan plan();
-
-    /**
-     * Returns the category of the Buildable that is either one of the {@link BuildableCategory} enum entries.
-     *
-     * @return the category of the Buildable
-     */
-    default BuildableCategory getCategory() {
-        return plan().getCategory();
-    }
 }

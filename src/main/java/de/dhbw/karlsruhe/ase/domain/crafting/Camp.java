@@ -45,7 +45,7 @@ public class Camp implements Serializable {
 
         final Set<Buildable> all = new HashSet<>(constructed);
         for (final Buildable b : all) {
-            if (b.getCategory() == BuildableCategory.BUILDING && ((Building) b).isDestructible())
+            if (b.plan().getCategory() == BuildableCategory.BUILDING && ((Building) b).isDestructible())
                 constructed.remove(b);
         }
     }
@@ -67,7 +67,7 @@ public class Camp implements Serializable {
 
         final Buildable crafted = workbench.build(plan, hasFireplace);
 
-        switch (crafted.getCategory()) {
+        switch (crafted.plan().getCategory()) {
             case TOOL:
                 final Tool tool = (Tool) crafted;
                 strongestWeapon = (getBonusDamage() < tool.getBonusDamage()) ? tool : strongestWeapon;
