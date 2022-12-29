@@ -1,0 +1,156 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.crafting.Workbench",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+Camp1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Camp</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ResourceConsumer1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)ResourceConsumer</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ consumeResources(required: Set&lt;ResourceRequirement&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hasResources(required: Set&lt;ResourceRequirement&gt;): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+ResourceStash1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ResourceStash</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   protectedResourcesCount: NonNegativeInteger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stash: Deque&lt;Resource&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(resource: Resource)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ consumeResources(required: Set&lt;ResourceRequirement&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ devastate()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hasResources(required: Set&lt;ResourceRequirement&gt;): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ protectTopMostNResources(n: NonNegativeInteger)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Workbench1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Workbench</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   consumer: ResourceConsumer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ build(plan: CraftingPlan, hasFireplace: boolean): Buildable</TD></TR>
+<TR><TD ALIGN="LEFT" >- build(plan: CraftingPlan): Buildable</TD></TR>
+<TR><TD ALIGN="LEFT" >- canBuild(plan: CraftingPlan, hasFireplace: boolean): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCraftablePlans(hasFireplace: boolean): Set&lt;CraftingPlan&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ consumer(): ResourceConsumer</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+Camp1135820194 -> Workbench1135820194[label="workbench
+[0..1]"];
+Workbench1135820194 -> ResourceConsumer1135820194[label="consumer
+[0..1]"];
+
+ResourceConsumer1135820194 -> ResourceStash1135820194[arrowhead=none, arrowtail=empty, dir=both];
+
+    
+}
+@enduml

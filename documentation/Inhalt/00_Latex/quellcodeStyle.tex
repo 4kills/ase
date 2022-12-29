@@ -55,6 +55,24 @@
 	xleftmargin=5.0ex
 }
 
+\lstdefinelanguage{diff}{
+  morecomment=[f][\color{blue}]{@@},     % group identifier
+  morecomment=[f][\color{red}]-,         % deleted lines 
+  morecomment=[f][\color{green}]+,       % added lines
+  morecomment=[f][\color{magenta}]{---}, % Diff header lines (must appear after +,-)
+  morecomment=[f][\color{magenta}]{+++},
+}
+
+\renewcommand{\ttdefault}{pcr}               % Schriftart, welche auch fett beinhaltet
+\lstdefinestyle{DiffStyle}{
+	language=diff,                             % Syntax Highlighting für Java
+	numbers=none,
+	%frame=single,                             % Umrandung des Codes
+	% keywordstyle=\bfseries\color{JavaLila},    % Keywords in eigener Farbe und fett
+	% commentstyle=\itshape\color{JavaGruen},    % Kommentare in eigener Farbe und italic
+	% stringstyle=\color{JavaBlau}               % Strings in eigener Farbe
+}
+
 % ---- Eigener JAVA-Style für den Quellcode
 \renewcommand{\ttdefault}{pcr}               % Schriftart, welche auch fett beinhaltet
 \lstdefinestyle{EigenerJavaStyle}{

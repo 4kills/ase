@@ -1,0 +1,179 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.crafting.ResourceRequirement",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+CraftingPlan1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)CraftingPlan</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   AXE: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   BALLON: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   CLUB: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   FIREPLACE: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   HANGGLIDER: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SAILINGRAFT: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SHACK: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   STEAMBOAT: CraftingPlan [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   category: BuildableCategory [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   requirements: Set&lt;ResourceRequirement&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   requiresFireplace: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ requiresFireplace(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+NonNegativeInteger970673240[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NonNegativeInteger</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   value: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(i: int): NonNegativeInteger</TD></TR>
+<TR><TD ALIGN="LEFT" >+ value(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Refabricatable970673240[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)Refabricatable&lt;T&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ refabricate(): T</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+Resource1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)Resource</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   METAL: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   NO_RESOURCE: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   PLASTIC: Resource [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   WOOD: Resource [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+ResourceRequirement1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ResourceRequirement</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: NonNegativeInteger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   resource: Resource [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ amount(): NonNegativeInteger</TD></TR>
+<TR><TD ALIGN="LEFT" >+ refabricate(): ResourceRequirement</TD></TR>
+<TR><TD ALIGN="LEFT" >+ resource(): Resource</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+CraftingPlan1135820194 -> ResourceRequirement1135820194[label="requirements
+[0..*]"];
+Refabricatable970673240 -> ResourceRequirement1135820194[arrowhead=none, arrowtail=empty, dir=both];
+ResourceRequirement1135820194 -> NonNegativeInteger970673240[label="amount
+[1]"];
+ResourceRequirement1135820194 -> Resource1135820194[label="resource
+[1]"];
+    
+}
+@enduml
