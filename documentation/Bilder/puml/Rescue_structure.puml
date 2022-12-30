@@ -1,0 +1,155 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 1,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "BothDirections" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.crafting.Rescue",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+
+
+GuaranteedRescue1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GuaranteedRescue</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   plan: CraftingPlan [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ endeavor(roll: Roll): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ plan(): CraftingPlan</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PossibleRescue1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PossibleRescue</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   plan: CraftingPlan [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ endeavor(roll: Roll): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ plan(): CraftingPlan</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Rescue1135820194[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)Rescue</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ endeavor(roll: Roll): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+RollHandler1052887806[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RollHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   camp: Camp [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastCard: Card [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   outcome: OutcomeType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- encounter(roll: Roll)</TD></TR>
+<TR><TD ALIGN="LEFT" >- endeavor(roll: Roll): GamePhase</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handle(phase: GamePhase, roll: Roll): GamePhase</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+
+Rescue1135820194 -> GuaranteedRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+Rescue1135820194 -> PossibleRescue1135820194[arrowhead=none, arrowtail=empty, dir=both];
+RollHandler1052887806 -> Rescue1135820194[label="endeavor() -> endeavor()"];
+    
+}
+@enduml
