@@ -59,6 +59,13 @@ public class CardDeck implements Deck<Card> {
      * @return true if the deck is valid and ready to use in the game, false otherwise
      */
     public boolean isValid() {
+        CardDeckConfiguration cardOccurrences = countCardOccurrences();
+
+        return config.withoutZeroOccurrenceEntries().equals(
+                cardOccurrences.withoutZeroOccurrenceEntries());
+    }
+
+    private CardDeckConfiguration countCardOccurrences() {
         final Map<Card, NonNegativeInteger> cardOccurrences = new HashMap<>();
 
         for (Card card : Card.values()) {
@@ -70,8 +77,7 @@ public class CardDeck implements Deck<Card> {
             cardOccurrences.put(card, amount.add(1));
         }
 
-        return config.withoutZeroOccurrenceEntries().equals(
-                new CardDeckConfiguration(cardOccurrences).withoutZeroOccurrenceEntries());
+        return new CardDeckConfiguration(cardOccurrences);
     }
 
     /**
