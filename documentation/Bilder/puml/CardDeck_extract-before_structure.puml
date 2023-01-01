@@ -1,0 +1,160 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": false,
+    "cutClient": false,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": false,
+    "cutConstructors": false
+  },
+  "graphTraversal": {
+    "forwardDepth": 1,
+    "backwardDepth": 0,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 0,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "de.dhbw.karlsruhe.ase.domain.cards.CardDeck",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+Card1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="8" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)Card</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+CardDeck1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardDeck</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   config: CardDeckConfiguration [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   deck: Deck&lt;Card&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   DEFAULT_CONFIGURATION: CardDeckConfiguration</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ CardDeck()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ CardDeck(config: CardDeckConfiguration)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ draw(): Card</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isDepleted(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isValid(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ iterator(): Iterator&lt;Card&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ lay(card: Card)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ reset()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CardDeckConfiguration1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CardDeckConfiguration</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cardOccurrences: Map&lt;Card, NonNegativeInteger&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ CardDeckConfiguration(cardOccurrences: Map&lt;Card, NonNegativeInteger&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cardOccurrences(): Map&lt;Card, NonNegativeInteger&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ withoutZeroOccurrenceEntries(): CardDeckConfiguration</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Deck1697264569[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(I)Deck&lt;T&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ draw(): T</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isDepleted(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ lay(element: T)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ reset()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#F1E5FD"
+];
+
+'edges    
+CardDeck1697264569 -> Card1697264569[label="deck
+[0..1]"];
+CardDeck1697264569 -> CardDeckConfiguration1697264569[label="config
+[0..1]"];
+CardDeck1697264569 -> Deck1697264569[label="deck
+[0..1]"];
+Deck1697264569 -> CardDeck1697264569[arrowhead=none, arrowtail=empty, dir=both];
+    
+}
+@enduml
