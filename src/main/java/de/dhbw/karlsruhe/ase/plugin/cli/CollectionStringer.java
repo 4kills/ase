@@ -26,6 +26,6 @@ public final class CollectionStringer {
         for (final T item : collection) {
             stringer.append(item).append(System.lineSeparator());
         }
-        return stringer.deleteCharAt(stringer.length() - 1).toString();
+        return stringer.substring(0, stringer.length() - System.lineSeparator().length());
     }
 }
